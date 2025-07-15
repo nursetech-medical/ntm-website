@@ -183,7 +183,10 @@ const Header = () => {
               )}
             </div>
 
-            <button className="p-2 text-gray-700 hover:text-teal-600 transition-colors duration-200">
+            <button 
+              onClick={() => setIsSearchModalOpen(true)}
+              className="p-2 text-gray-700 hover:text-teal-600 transition-colors duration-200"
+            >
               <Search className="h-6 w-6" />
             </button>
           </div>
