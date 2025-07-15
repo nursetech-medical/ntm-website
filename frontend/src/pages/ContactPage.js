@@ -271,12 +271,14 @@ const ContactPage = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <Button
+                    onClick={() => window.location.href = '/sample-request'}
                     className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundColor: '#8BBAB8', color: 'white' }}
                   >
                     Request a Sample
                   </Button>
                   <Button
+                    onClick={() => window.location.href = '/trial-request'}
                     className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundColor: '#1F8051', color: 'white' }}
                   >
