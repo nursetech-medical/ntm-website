@@ -545,3 +545,15 @@ FINAL SUMMARY: ✅ ALL REQUESTED CHANGES SUCCESSFULLY IMPLEMENTED
         - working: true
         - agent: "testing"
         - comment: "✅ Mobile floating action widget fully functional. Mobile bottom bar found with Call and Request Trial buttons. Widget appears correctly on mobile viewport (390x844). Call button and Request Trial button both present and functional in floating action widget."
+
+  - task: "Header Button Color Consistency - Request a Sample Button"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/components/Header.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+        - agent: "testing"
+        - comment: "❌ CRITICAL ISSUE: Header 'Request a Sample' button still uses old color #8BBAB8 instead of new contrast color #214140. Hero section button correctly uses #214140, but header button on line 165 needs to be updated from borderColor: '#8BBAB8' to borderColor: '#214140' for consistency and better contrast."
