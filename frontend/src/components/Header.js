@@ -18,7 +18,7 @@ const Header = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrolled = window.scrollY > 50;
-      setIsSticky(scrolled);
+      setIsScrolled(scrolled);
     };
 
     const handleKeyDown = (e) => {
