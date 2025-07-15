@@ -21,29 +21,29 @@ const FloatingActionWidget = () => {
     { 
       icon: FileText, 
       label: 'Request a Sample',
-      action: () => console.log('Sample request'),
+      action: () => window.location.href = '/sample-request',
       primary: true 
     },
     { 
       icon: Download, 
       label: 'Request a Trial',
-      action: () => console.log('Trial start'),
+      action: () => window.location.href = '/trial-request',
       primary: true 
     },
     { 
       icon: Download, 
       label: 'Download Resources',
-      action: () => console.log('Download resources') 
+      action: () => window.location.href = '/resource-library'
     },
     { 
       icon: Phone, 
       label: 'Contact Us',
-      action: () => console.log('Contact us') 
+      action: () => window.location.href = '/contact'
     },
     { 
       icon: MessageCircle, 
       label: 'Live Chat',
-      action: () => console.log('Live chat') 
+      action: () => window.location.href = '/contact'
     }
   ];
 
