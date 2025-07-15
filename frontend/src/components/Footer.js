@@ -216,7 +216,7 @@ const Footer = () => {
                 </div>
                 <div className="mt-4 space-y-2">
                   <a href="/contact" className="block text-gray-600 hover:text-teal-600 transition-colors duration-200">Contact Sales</a>
-                  <a href="/distributors" className="block text-gray-600 hover:text-teal-600 transition-colors duration-200">Find a Distributor</a>
+                  <a href="/find-distributor" className="block text-gray-600 hover:text-teal-600 transition-colors duration-200">Find a Distributor</a>
                 </div>
               </div>
 
