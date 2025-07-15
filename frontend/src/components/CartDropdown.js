@@ -1,27 +1,110 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { ShoppingCart, Plus, Minus, Trash2 } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
+import { cartApi, productsApi, getSessionId, handleApiError } from '../services/api';
+import { useToast } from '../hooks/use-toast';
 
 const CartDropdown = ({ onClose }) => {
-  const { cartItems, updateQuantity, removeFromCart, getTotalPrice } = useCart();
+  const { cartItems, setCartItems, getTotalPrice } = useCart();
+  const [isLoading, setIsLoading] = useState(false);
+  const { toast } = useToast();
 
-  const handleQuantityChange = (productId, newQuantity) => {
-    updateQuantity(productId, newQuantity);
+  useEffect(() => {
+    fetchCart();
+  }, []);
+
+  const fetchCart = async () => {
+    try {
+      const sessionId = getSessionId();
+      const response = await cartApi.getCart(sessionId);
+      setCartItems(response.data.items || []);
+    } catch (error) {
+      console.error('Error fetching cart:', error);
+    }
   };
 
-  const handleRemoveItem = (productId) => {
-    removeFromCart(productId);
+  const handleQuantityChange = async (productId, newQuantity) => {
+    setIsLoading(true);
+    try {
+      const sessionId = getSessionId();
+      const response = await cartApi.updateCart({
+        session_id: sessionId,
+        product_id: productId,
+        quantity: newQuantity
+      });
+      setCartItems(response.data.items || []);
+      
+      toast({
+        title: "Cart Updated",
+        description: "Item quantity updated successfully",
+        duration: 3000,
+      });
+    } catch (error) {
+      const apiError = handleApiError(error);
+      toast({
+        title: "Error",
+        description: apiError.message,
+        variant: "destructive",
+        duration: 3000,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleRemoveItem = async (productId) => {
+    setIsLoading(true);
+    try {
+      const sessionId = getSessionId();
+      const response = await cartApi.removeFromCart(sessionId, productId);
+      setCartItems(response.data.items || []);
+      
+      toast({
+        title: "Item Removed",
+        description: "Item removed from cart successfully",
+        duration: 3000,
+      });
+    } catch (error) {
+      const apiError = handleApiError(error);
+      toast({
+        title: "Error",
+        description: apiError.message,
+        variant: "destructive",
+        duration: 3000,
+      });
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const handleProceedToCheckout = () => {
-    console.log('Proceeding to checkout');
+    toast({
+      title: "Checkout",
+      description: "Redirecting to checkout page...",
+      duration: 3000,
+    });
     onClose();
   };
 
-  const handleRequestQuote = () => {
-    console.log('Request quote clicked');
+  const handleRequestQuote = async () => {
+    try {
+      // You can implement quote request logic here
+      toast({
+        title: "Quote Request",
+        description: "Quote request submitted successfully! We'll contact you soon.",
+        duration: 5000,
+      });
+    } catch (error) {
+      const apiError = handleApiError(error);
+      toast({
+        title: "Error",
+        description: apiError.message,
+        variant: "destructive",
+        duration: 3000,
+      });
+    }
     onClose();
   };
 
@@ -54,14 +137,14 @@ const CartDropdown = ({ onClose }) => {
         {/* Cart Items */}
         <div className="max-h-80 overflow-y-auto">
           {cartItems.map((item) => (
-            <div key={item.id} className="flex items-center p-4 border-b border-gray-100">
+            <div key={item.product_id} className="flex items-center p-4 border-b border-gray-100">
               <div className="w-16 h-16 bg-gray-100 rounded-lg mr-3 flex items-center justify-center">
                 <span className="text-xs text-gray-600">Product</span>
               </div>
               
               <div className="flex-1">
-                <h4 className="font-medium text-sm text-gray-800">{item.name}</h4>
-                <p className="text-xs text-gray-600">{item.description}</p>
+                <h4 className="font-medium text-sm text-gray-800">Product {item.product_id}</h4>
+                <p className="text-xs text-gray-600">Medical Device</p>
                 <p className="text-sm font-semibold" style={{ color: '#214140' }}>
                   ${item.price.toFixed(2)}
                 </p>
@@ -69,21 +152,24 @@ const CartDropdown = ({ onClose }) => {
               
               <div className="flex items-center space-x-2">
                 <button
-                  onClick={() => handleQuantityChange(item.id, item.quantity - 1)}
-                  className="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200"
+                  onClick={() => handleQuantityChange(item.product_id, item.quantity - 1)}
+                  disabled={isLoading}
+                  className="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200 disabled:opacity-50"
                 >
                   <Minus className="h-4 w-4 text-gray-600" />
                 </button>
                 <span className="w-8 text-center text-sm font-medium">{item.quantity}</span>
                 <button
-                  onClick={() => handleQuantityChange(item.id, item.quantity + 1)}
-                  className="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200"
+                  onClick={() => handleQuantityChange(item.product_id, item.quantity + 1)}
+                  disabled={isLoading}
+                  className="p-1 rounded-full hover:bg-gray-100 transition-colors duration-200 disabled:opacity-50"
                 >
                   <Plus className="h-4 w-4 text-gray-600" />
                 </button>
                 <button
-                  onClick={() => handleRemoveItem(item.id)}
-                  className="p-1 rounded-full hover:bg-red-100 transition-colors duration-200 ml-2"
+                  onClick={() => handleRemoveItem(item.product_id)}
+                  disabled={isLoading}
+                  className="p-1 rounded-full hover:bg-red-100 transition-colors duration-200 ml-2 disabled:opacity-50"
                 >
                   <Trash2 className="h-4 w-4 text-red-500" />
                 </button>
@@ -108,13 +194,15 @@ const CartDropdown = ({ onClose }) => {
           <div className="space-y-2">
             <Button
               onClick={handleProceedToCheckout}
+              disabled={isLoading}
               className="w-full hover:opacity-90 transition-opacity duration-200"
               style={{ backgroundColor: '#214140', color: 'white' }}
             >
-              Proceed to Checkout
+              {isLoading ? 'Processing...' : 'Proceed to Checkout'}
             </Button>
             <Button
               onClick={handleRequestQuote}
+              disabled={isLoading}
               variant="outline"
               className="w-full text-sm hover:bg-gray-50 transition-colors duration-200"
               style={{ borderColor: '#8BBAB8', color: '#8BBAB8' }}
