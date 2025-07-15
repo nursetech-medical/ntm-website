@@ -26,9 +26,10 @@ const Header = () => {
     {
       label: 'Product',
       items: [
-        { label: 'Cordflex™ Clip Overview', path: '/product-overview' },
+        { label: 'Cordflex™ Overview', path: '/product-overview' },
         { label: 'Clinical Evidence', path: '/clinical-evidence' },
         { label: 'How It Works', path: '/how-it-works' },
+        { label: 'Specifications', path: '/specifications' },
         { label: 'Order Now', path: '/order-now' }
       ]
     },
@@ -36,6 +37,9 @@ const Header = () => {
       label: 'Resources',
       items: [
         { label: 'Resource Library', path: '/resource-library' },
+        { label: 'Videos', path: '/videos' },
+        { label: 'Case Studies', path: '/case-studies' },
+        { label: 'Support', path: '/support' },
         { label: 'Blog', path: '/blog' },
         { label: 'News & Press', path: '/news' },
         { label: 'FAQs', path: '/faq' }
@@ -43,8 +47,12 @@ const Header = () => {
     },
     {
       label: 'About',
-      items: [],
-      path: '/about'
+      items: [
+        { label: 'Our Company', path: '/about' },
+        { label: 'Careers', path: '/careers' },
+        { label: 'Partners', path: '/partners' },
+        { label: 'Find a Distributor', path: '/find-distributor' }
+      ]
     },
     {
       label: 'Contact',
