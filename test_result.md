@@ -102,7 +102,7 @@
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
 
-user_problem_statement: "Please thoroughly test the full-stack Cordflex medical device website I've created. This is now a complete application with React frontend, FastAPI backend, MongoDB, scroll animations, API integration, and comprehensive functionality across Landing Page (/), About Page (/about), and Contact Page (/contact)."
+user_problem_statement: "Generate and update content for specific pages: Cordflex™ Overview, Clinical Evidence, How It Works, Specifications, Order Now, Case Studies, Support, Careers, Partners, Find a Distributor, Videos, Site Map, Privacy Policy, Terms of Service, Refund Policy Page, Intellectual Property. Fix the News & Press page, which is currently not loading properly. Add telephone number, email, and address to the footer. Link all social media buttons to their respective URLs. Add a Call Now button at the top of the page. Remove the Schedule a Demo link/page. Ensure the Contact Sales link redirects to the Contact Us page. Rename Resource Center to Resource Library and implement its specific sublink structure and content, including linking to new Videos page."
 
 frontend:
   - task: "Landing Page with Scroll Animations and Counter Animations"
