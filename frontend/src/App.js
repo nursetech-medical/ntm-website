@@ -59,7 +59,7 @@ function App() {
             <Route path="/privacy-policy" element={<PrivacyPolicyPage />} />
             <Route path="/terms-of-service" element={<TermsOfServicePage />} />
             <Route path="/refund-policy" element={<RefundPolicyPage />} />
-            <Route path="/intellectual-property" element={<IntellectualPropertyPage />} />
+            <Route path="/ip" element={<IntellectualPropertyPage />} />
           </Routes>
         </BrowserRouter>
         <Toaster />
