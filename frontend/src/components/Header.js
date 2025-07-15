@@ -299,11 +299,11 @@ const Header = () => {
             Call
           </Button>
           <Button
-            onClick={handleTrialRequest}
+            onClick={() => window.location.href = '/order-now'}
             className="flex-1 hover:opacity-90 transition-opacity duration-200"
             style={{ backgroundColor: '#214140', color: 'white' }}
           >
-            Request Trial
+            Order Now
           </Button>
         </div>
       </div>
