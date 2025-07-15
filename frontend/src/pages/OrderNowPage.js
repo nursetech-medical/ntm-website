@@ -152,7 +152,7 @@ const OrderNowPage = () => {
                         <p className="text-gray-600 text-sm mb-3">{product.description}</p>
                         <div className="flex items-center space-x-2">
                           <Badge variant="secondary" style={{ backgroundColor: '#DFEAF0', color: '#214140' }}>
-                            Sterile
+                            Single-Use
                           </Badge>
                           <Badge variant="secondary" style={{ backgroundColor: '#DFEAF0', color: '#214140' }}>
                             FDA Registered
