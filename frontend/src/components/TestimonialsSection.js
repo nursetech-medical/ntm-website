@@ -247,7 +247,7 @@ const TestimonialsSection = () => {
                   className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105"
                   style={{ backgroundColor: '#214140', color: 'white' }}
                 >
-                  {isLoadingTrial ? 'Submitting...' : 'Start Your Trial'}
+                  {isLoadingTrial ? 'Submitting...' : 'Request a Trial'}
                 </Button>
                 <Button
                   onClick={handleReadCaseStudies}
