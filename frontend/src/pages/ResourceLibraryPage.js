@@ -285,7 +285,7 @@ const ResourceLibraryPage = () => {
                               variant="outline"
                               size="sm"
                               className="hover:bg-teal-50 transition-colors duration-200"
-                              style={{ borderColor: '#8BBAB8', color: '#8BBAB8' }}
+                              style={{ borderColor: '#214140', color: '#214140' }}
                             >
                               {resource.downloadable ? 'Download' : 
                                resource.interactive ? 'Launch Tool' :
