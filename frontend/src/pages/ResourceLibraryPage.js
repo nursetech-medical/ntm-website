@@ -178,7 +178,7 @@ const ResourceLibraryPage = () => {
         },
         {
           title: "Request a Trial",
-          description: "Start a comprehensive trial in your facility",
+          description: "Request a comprehensive trial in your facility",
           type: "Trial Request",
           downloadable: false,
           link: "/trial-request"
