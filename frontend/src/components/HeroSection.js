@@ -1,23 +1,98 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Play, CheckCircle } from 'lucide-react';
-import { mockData } from '../mockData';
+import { contactApi, handleApiError } from '../services/api';
+import { useToast } from '../hooks/use-toast';
+import AnimatedSection from './AnimatedSection';
+import AnimatedCounter from './AnimatedCounter';
+import StaggeredList from './StaggeredList';
 
 const HeroSection = () => {
-  const { product, statistics } = mockData;
+  const [isLoadingTrial, setIsLoadingTrial] = useState(false);
+  const [isLoadingSample, setIsLoadingSample] = useState(false);
+  const { toast } = useToast();
 
-  const handleTrialRequest = () => {
-    console.log('Trial request initiated');
+  const handleTrialRequest = async () => {
+    setIsLoadingTrial(true);
+    try {
+      const response = await contactApi.trialRequest({
+        name: 'Trial Request',
+        title: 'Healthcare Professional',
+        email: 'trial@example.com',
+        phone: '',
+        hospital: 'Sample Hospital',
+        department: 'ICU',
+        beds: 30,
+        current_solution: 'Manual management',
+        challenges: ['Line tangles', 'Patient safety'],
+        start_date: new Date().toISOString(),
+        timeline: '3 months',
+        stakeholders: 'Nursing staff'
+      });
+      
+      toast({
+        title: "Trial Request Submitted",
+        description: response.data.message,
+        duration: 5000,
+      });
+    } catch (error) {
+      const apiError = handleApiError(error);
+      toast({
+        title: "Error",
+        description: apiError.message,
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setIsLoadingTrial(false);
+    }
   };
 
-  const handleSampleRequest = () => {
-    console.log('Sample request initiated');
+  const handleSampleRequest = async () => {
+    setIsLoadingSample(true);
+    try {
+      const response = await contactApi.sampleRequest({
+        name: 'Sample Request',
+        email: 'sample@example.com',
+        phone: '',
+        hospital: 'Sample Hospital',
+        department: 'ICU',
+        beds: 30,
+        source: 'Website',
+        comments: 'Interested in trying Cordflex'
+      });
+      
+      toast({
+        title: "Sample Request Submitted",
+        description: response.data.message,
+        duration: 5000,
+      });
+    } catch (error) {
+      const apiError = handleApiError(error);
+      toast({
+        title: "Error",
+        description: apiError.message,
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
+      setIsLoadingSample(false);
+    }
   };
 
   const handleWatchDemo = () => {
-    console.log('Watch demo clicked');
+    const videoSection = document.getElementById('video-section');
+    if (videoSection) {
+      videoSection.scrollIntoView({ behavior: 'smooth' });
+    }
   };
+
+  const features = ['Single-Use', 'Sterile', 'FDA Registered'];
+  const trustIndicators = [
+    'Developed by ICU Nurses & Biomedical Engineers',
+    '90% of surveyed nurses would use Cordflex if stocked'
+  ];
 
   return (
     <section className="relative pt-24 pb-20 overflow-hidden">
@@ -38,108 +113,128 @@ const HeroSection = () => {
           {/* Content */}
           <div className="space-y-8">
             {/* Trust Badges */}
-            <div className="flex flex-wrap gap-2">
-              {product.features.map((feature, index) => (
-                <Badge 
-                  key={index} 
-                  variant="secondary" 
-                  className="text-sm font-medium"
-                  style={{ backgroundColor: '#DFEAF0', color: '#214140' }}
-                >
-                  {feature}
-                </Badge>
-              ))}
-            </div>
+            <AnimatedSection animation="fade-up" delay={100}>
+              <StaggeredList delay={50} className="flex flex-wrap gap-2">
+                {features.map((feature, index) => (
+                  <Badge 
+                    key={index} 
+                    variant="secondary" 
+                    className="text-sm font-medium"
+                    style={{ backgroundColor: '#DFEAF0', color: '#214140' }}
+                  >
+                    {feature}
+                  </Badge>
+                ))}
+              </StaggeredList>
+            </AnimatedSection>
 
             {/* Headline */}
-            <div className="space-y-4">
-              <h1 className="text-4xl lg:text-6xl font-bold leading-tight" style={{ color: '#214140' }}>
-                {product.tagline}
-              </h1>
-              <p className="text-xl text-gray-600 leading-relaxed">
-                {product.description}
-              </p>
-            </div>
+            <AnimatedSection animation="fade-up" delay={200}>
+              <div className="space-y-4">
+                <h1 className="text-4xl lg:text-6xl font-bold leading-tight" style={{ color: '#214140' }}>
+                  Transform ICU Line Management in 30 seconds
+                </h1>
+                <p className="text-xl text-gray-600 leading-relaxed">
+                  The Cordflex Clip reduces nurse time by 37% and makes 78% of nurses feel safer during patient ambulation
+                </p>
+              </div>
+            </AnimatedSection>
 
             {/* Trust Indicators */}
-            <div className="space-y-3">
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="h-5 w-5 text-green-500" />
-                <span className="text-gray-700 font-medium">Developed by ICU Nurses & Biomedical Engineers</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <CheckCircle className="h-5 w-5 text-green-500" />
-                <span className="text-gray-700 font-medium">90% of surveyed nurses would use Cordflex if stocked</span>
-              </div>
-            </div>
+            <AnimatedSection animation="fade-up" delay={300}>
+              <StaggeredList delay={100} className="space-y-3">
+                {trustIndicators.map((indicator, index) => (
+                  <div key={index} className="flex items-center space-x-3">
+                    <CheckCircle className="h-5 w-5 text-green-500" />
+                    <span className="text-gray-700 font-medium">{indicator}</span>
+                  </div>
+                ))}
+              </StaggeredList>
+            </AnimatedSection>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
-              <Button
-                onClick={handleTrialRequest}
-                size="lg"
-                className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105"
-                style={{ backgroundColor: '#214140', color: 'white' }}
-              >
-                Request a Trial
-              </Button>
-              <Button
-                onClick={handleSampleRequest}
-                variant="outline"
-                size="lg"
-                className="px-8 py-4 text-lg font-semibold border-2 hover:bg-teal-50 transition-all duration-200 transform hover:scale-105"
-                style={{ borderColor: '#8BBAB8', color: '#8BBAB8' }}
-              >
-                Request a Sample
-              </Button>
-              <Button
-                onClick={handleWatchDemo}
-                variant="ghost"
-                size="lg"
-                className="px-8 py-4 text-lg font-semibold hover:bg-gray-50 transition-all duration-200 group"
-                style={{ color: '#214140' }}
-              >
-                <Play className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-200" />
-                Watch Demo
-              </Button>
-            </div>
+            <AnimatedSection animation="fade-up" delay={400}>
+              <div className="flex flex-col sm:flex-row gap-4">
+                <Button
+                  onClick={handleTrialRequest}
+                  disabled={isLoadingTrial}
+                  size="lg"
+                  className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105"
+                  style={{ backgroundColor: '#214140', color: 'white' }}
+                >
+                  {isLoadingTrial ? 'Submitting...' : 'Request a Trial'}
+                </Button>
+                <Button
+                  onClick={handleSampleRequest}
+                  disabled={isLoadingSample}
+                  variant="outline"
+                  size="lg"
+                  className="px-8 py-4 text-lg font-semibold border-2 hover:bg-teal-50 transition-all duration-200 transform hover:scale-105"
+                  style={{ borderColor: '#8BBAB8', color: '#8BBAB8' }}
+                >
+                  {isLoadingSample ? 'Submitting...' : 'Request a Sample'}
+                </Button>
+                <Button
+                  onClick={handleWatchDemo}
+                  variant="ghost"
+                  size="lg"
+                  className="px-8 py-4 text-lg font-semibold hover:bg-gray-50 transition-all duration-200 group"
+                  style={{ color: '#214140' }}
+                >
+                  <Play className="h-5 w-5 mr-2 group-hover:scale-110 transition-transform duration-200" />
+                  Watch Demo
+                </Button>
+              </div>
+            </AnimatedSection>
 
             {/* Contact Link */}
-            <div className="pt-4">
-              <a 
-                href="#contact" 
-                className="text-gray-600 hover:text-teal-600 transition-colors duration-200 underline"
-              >
-                Questions? Contact Us
-              </a>
-            </div>
+            <AnimatedSection animation="fade-up" delay={500}>
+              <div className="pt-4">
+                <a 
+                  href="/contact" 
+                  className="text-gray-600 hover:text-teal-600 transition-colors duration-200 underline"
+                >
+                  Questions? Contact Us
+                </a>
+              </div>
+            </AnimatedSection>
           </div>
 
           {/* Product Visual */}
-          <div className="relative">
-            <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-2xl">
-              <img 
-                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDUwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkZGRkZGIi8+CjxyZWN0IHg9IjEwMCIgeT0iMTAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzIxNDE0MCIgcng9IjEwIi8+Cjx0ZXh0IHg9IjI1MCIgeT0iMjEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRkZGRkZGIiBmb250LXNpemU9IjE4IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPkNvcmRmbGV4IERldmljZTwvdGV4dD4KPC9zdmc+"
-                alt="Cordflex Device"
-                className="w-full h-auto rounded-lg"
-              />
-              
-              {/* Floating Stats */}
-              <div className="absolute -top-4 -right-4 bg-white rounded-lg shadow-lg p-4 border border-gray-200">
-                <div className="text-sm text-gray-600 font-medium">Usage Rate</div>
-                <div className="text-2xl font-bold" style={{ color: '#1F8051' }}>90%</div>
+          <AnimatedSection animation="fade-left" delay={300}>
+            <div className="relative">
+              <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-2xl">
+                <img 
+                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDUwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkZGRkZGIi8+CjxyZWN0IHg9IjEwMCIgeT0iMTAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzIxNDE0MCIgcng9IjEwIi8+Cjx0ZXh0IHg9IjI1MCIgeT0iMjEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRkZGRkZGIiBmb250LXNpemU9IjE4IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPkNvcmRmbGV4IERldmljZTwvdGV4dD4KPC9zdmc+"
+                  alt="Cordflex Device"
+                  className="w-full h-auto rounded-lg"
+                />
+                
+                {/* Floating Stats */}
+                <AnimatedSection animation="fade-down" delay={800}>
+                  <div className="absolute -top-4 -right-4 bg-white rounded-lg shadow-lg p-4 border border-gray-200">
+                    <div className="text-sm text-gray-600 font-medium">Usage Rate</div>
+                    <div className="text-2xl font-bold" style={{ color: '#1F8051' }}>
+                      <AnimatedCounter value="90%" duration={1500} />
+                    </div>
+                  </div>
+                </AnimatedSection>
+                
+                <AnimatedSection animation="fade-up" delay={900}>
+                  <div className="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-4 border border-gray-200">
+                    <div className="text-sm text-gray-600 font-medium">Time Saved</div>
+                    <div className="text-2xl font-bold" style={{ color: '#1F8051' }}>
+                      <AnimatedCounter value="37%" duration={1500} />
+                    </div>
+                  </div>
+                </AnimatedSection>
               </div>
-              
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-4 border border-gray-200">
-                <div className="text-sm text-gray-600 font-medium">Time Saved</div>
-                <div className="text-2xl font-bold" style={{ color: '#1F8051' }}>37%</div>
-              </div>
-            </div>
 
-            {/* Animated Elements */}
-            <div className="absolute top-4 right-4 w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
-            <div className="absolute bottom-4 left-4 w-3 h-3 bg-teal-400 rounded-full animate-bounce"></div>
-          </div>
+              {/* Animated Elements */}
+              <div className="absolute top-4 right-4 w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
+              <div className="absolute bottom-4 left-4 w-3 h-3 bg-teal-400 rounded-full animate-bounce"></div>
+            </div>
+          </AnimatedSection>
         </div>
       </div>
     </section>
