@@ -13,72 +13,12 @@ const HeroSection = () => {
   const [isLoadingSample, setIsLoadingSample] = useState(false);
   const { toast } = useToast();
 
-  const handleTrialRequest = async () => {
-    setIsLoadingTrial(true);
-    try {
-      const response = await contactApi.trialRequest({
-        name: 'Trial Request',
-        title: 'Healthcare Professional',
-        email: 'trial@example.com',
-        phone: '',
-        hospital: 'Sample Hospital',
-        department: 'ICU',
-        beds: 30,
-        current_solution: 'Manual management',
-        challenges: ['Line tangles', 'Patient safety'],
-        start_date: new Date().toISOString(),
-        timeline: '3 months',
-        stakeholders: 'Nursing staff'
-      });
-      
-      toast({
-        title: "Trial Request Submitted",
-        description: response.data.message,
-        duration: 5000,
-      });
-    } catch (error) {
-      const apiError = handleApiError(error);
-      toast({
-        title: "Error",
-        description: apiError.message,
-        variant: "destructive",
-        duration: 5000,
-      });
-    } finally {
-      setIsLoadingTrial(false);
-    }
+  const handleTrialRequest = () => {
+    window.location.href = '/trial-request';
   };
 
-  const handleSampleRequest = async () => {
-    setIsLoadingSample(true);
-    try {
-      const response = await contactApi.sampleRequest({
-        name: 'Sample Request',
-        email: 'sample@example.com',
-        phone: '',
-        hospital: 'Sample Hospital',
-        department: 'ICU',
-        beds: 30,
-        source: 'Website',
-        comments: 'Interested in trying Cordflex'
-      });
-      
-      toast({
-        title: "Sample Request Submitted",
-        description: response.data.message,
-        duration: 5000,
-      });
-    } catch (error) {
-      const apiError = handleApiError(error);
-      toast({
-        title: "Error",
-        description: apiError.message,
-        variant: "destructive",
-        duration: 5000,
-      });
-    } finally {
-      setIsLoadingSample(false);
-    }
+  const handleSampleRequest = () => {
+    window.location.href = '/sample-request';
   };
 
   const handleWatchDemo = () => {
