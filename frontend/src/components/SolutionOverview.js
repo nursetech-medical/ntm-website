@@ -145,21 +145,19 @@ const SolutionOverview = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Button
                 onClick={handleSampleRequest}
-                disabled={isLoadingSample}
                 size="lg"
                 className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105"
                 style={{ backgroundColor: '#8BBAB8', color: 'white' }}
               >
-                {isLoadingSample ? 'Submitting...' : 'Request a Sample'}
+                Request a Sample
               </Button>
               <Button
                 onClick={handleTrialRequest}
-                disabled={isLoadingTrial}
                 size="lg"
                 className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105"
                 style={{ backgroundColor: '#214140', color: 'white' }}
               >
-                {isLoadingTrial ? 'Submitting...' : 'Request a Trial'}
+                Request a Trial
               </Button>
               <Button
                 onClick={handleContactTeam}
