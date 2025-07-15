@@ -165,9 +165,11 @@ const Footer = () => {
               </h3>
               <ul className="space-y-2">
                 <li><a href="/resource-library" className="text-gray-600 hover:text-teal-600 transition-colors duration-200">Resource Library</a></li>
+                <li><a href="/videos" className="text-gray-600 hover:text-teal-600 transition-colors duration-200">Videos</a></li>
+                <li><a href="/case-studies" className="text-gray-600 hover:text-teal-600 transition-colors duration-200">Case Studies</a></li>
+                <li><a href="/support" className="text-gray-600 hover:text-teal-600 transition-colors duration-200">Support</a></li>
                 <li><a href="/blog" className="text-gray-600 hover:text-teal-600 transition-colors duration-200">Blog</a></li>
                 <li><a href="/news" className="text-gray-600 hover:text-teal-600 transition-colors duration-200">News & Press</a></li>
-                <li><a href="/case-studies" className="text-gray-600 hover:text-teal-600 transition-colors duration-200">Case Studies</a></li>
                 <li><a href="/faq" className="text-gray-600 hover:text-teal-600 transition-colors duration-200">FAQs</a></li>
               </ul>
             </div>
