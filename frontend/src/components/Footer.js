@@ -267,7 +267,7 @@ const Footer = () => {
                 <span className="text-gray-400">|</span>
                 <a href="/refund-policy" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Refund Policy</a>
                 <span className="text-gray-400">|</span>
-                <a href="/intellectual-property" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Intellectual Property</a>
+                <a href="/ip" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Intellectual Property</a>
                 <span className="text-gray-400">|</span>
                 <a href="/site-map" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Site Map</a>
               </div>
