@@ -4,6 +4,7 @@ import { Button } from './ui/button';
 import { ShoppingCart, Menu, X, Search, Phone } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import CartDropdown from './CartDropdown';
+import SearchModal from './SearchModal';
 import { Badge } from './ui/badge';
 
 const Header = () => {
