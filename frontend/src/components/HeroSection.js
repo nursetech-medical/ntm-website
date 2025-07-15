@@ -23,7 +23,7 @@ const HeroSection = () => {
     }
   };
 
-  const features = ['Single-Use', 'Sterile', 'FDA Registered'];
+  const features = ['Single-Use', 'FDA Registered'];
   const trustIndicators = [
     'Developed by ICU Nurses & Biomedical Engineers',
     '90% of surveyed nurses would use Cordflex if stocked'
