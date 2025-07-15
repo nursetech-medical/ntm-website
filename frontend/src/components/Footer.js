@@ -261,13 +261,15 @@ const Footer = () => {
                 © 2024 Nursetech Medical Corp. All rights reserved.
               </p>
               <div className="flex justify-center md:justify-start space-x-4 mt-2">
-                <a href="/privacy" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Privacy Policy</a>
+                <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Privacy Policy</a>
                 <span className="text-gray-400">|</span>
-                <a href="/terms" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Terms of Service</a>
+                <a href="/terms-of-service" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Terms of Service</a>
                 <span className="text-gray-400">|</span>
-                <a href="/refund" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Refund Policy</a>
+                <a href="/refund-policy" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Refund Policy</a>
                 <span className="text-gray-400">|</span>
-                <a href="/ip" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Intellectual Property</a>
+                <a href="/intellectual-property" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Intellectual Property</a>
+                <span className="text-gray-400">|</span>
+                <a href="/site-map" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Site Map</a>
               </div>
             </div>
             
