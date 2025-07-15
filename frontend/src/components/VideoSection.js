@@ -191,7 +191,7 @@ const VideoSection = () => {
                 className="px-8 py-4 text-lg font-semibold border-2 hover:bg-teal-50 transition-all duration-200 transform hover:scale-105"
                 style={{ borderColor: '#8BBAB8', color: '#8BBAB8' }}
               >
-                Schedule a Live Demo
+                Request a Trial
               </Button>
             </div>
           </AnimatedSection>
