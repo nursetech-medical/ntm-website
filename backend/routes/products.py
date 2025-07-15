@@ -28,6 +28,8 @@ async def get_product(product_id: str, db: Database = Depends(get_db)):
         if not product:
             raise HTTPException(status_code=404, detail="Product not found")
         return product
+    except HTTPException:
+        raise  # Re-raise HTTP exceptions as-is
     except Exception as e:
         logger.error(f"Error fetching product: {e}")
         raise HTTPException(status_code=500, detail="Internal server error")
