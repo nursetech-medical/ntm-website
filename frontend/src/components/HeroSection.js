@@ -97,22 +97,20 @@ const HeroSection = () => {
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button
                   onClick={handleTrialRequest}
-                  disabled={isLoadingTrial}
                   size="lg"
                   className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105"
                   style={{ backgroundColor: '#214140', color: 'white' }}
                 >
-                  {isLoadingTrial ? 'Submitting...' : 'Request a Trial'}
+                  Request a Trial
                 </Button>
                 <Button
                   onClick={handleSampleRequest}
-                  disabled={isLoadingSample}
                   variant="outline"
                   size="lg"
                   className="px-8 py-4 text-lg font-semibold border-2 hover:bg-teal-50 transition-all duration-200 transform hover:scale-105"
                   style={{ borderColor: '#8BBAB8', color: '#8BBAB8' }}
                 >
-                  {isLoadingSample ? 'Submitting...' : 'Request a Sample'}
+                  Request a Sample
                 </Button>
                 <Button
                   onClick={handleWatchDemo}
