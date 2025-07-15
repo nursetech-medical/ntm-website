@@ -26,7 +26,7 @@ const FloatingActionWidget = () => {
     },
     { 
       icon: Download, 
-      label: 'Start Your Trial',
+      label: 'Request a Trial',
       action: () => console.log('Trial start'),
       primary: true 
     },
