@@ -123,8 +123,8 @@ const Footer = () => {
               <div className="space-y-3 text-gray-600">
                 <div className="flex items-center space-x-3">
                   <Phone className="h-5 w-5" style={{ color: '#8BBAB8' }} />
-                  <a href="tel:+14108354089" className="hover:text-teal-600 transition-colors duration-200">
-                    (410) 835-4089
+                  <a href="tel:+18002673539" className="hover:text-teal-600 transition-colors duration-200">
+                    1-800-CORDFLEX (1-800-267-3539)
                   </a>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -136,8 +136,9 @@ const Footer = () => {
                 <div className="flex items-start space-x-3">
                   <MapPin className="h-5 w-5 mt-1" style={{ color: '#8BBAB8' }} />
                   <div>
-                    <p>8 The Green Ste A</p>
-                    <p>Dover, DE 19001</p>
+                    <p>Nursetech Medical LLC</p>
+                    <p>123 Medical Plaza, Suite 400</p>
+                    <p>Boston, MA 02101</p>
                   </div>
                 </div>
               </div>
