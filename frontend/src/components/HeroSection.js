@@ -1,17 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
 import { Play, CheckCircle } from 'lucide-react';
-import { contactApi, handleApiError } from '../services/api';
-import { useToast } from '../hooks/use-toast';
 import AnimatedSection from './AnimatedSection';
 import AnimatedCounter from './AnimatedCounter';
 import StaggeredList from './StaggeredList';
 
 const HeroSection = () => {
-  const [isLoadingTrial, setIsLoadingTrial] = useState(false);
-  const [isLoadingSample, setIsLoadingSample] = useState(false);
-  const { toast } = useToast();
 
   const handleTrialRequest = () => {
     window.location.href = '/trial-request';
