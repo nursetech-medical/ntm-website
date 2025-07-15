@@ -205,7 +205,7 @@ const CartDropdown = ({ onClose }) => {
               disabled={isLoading}
               variant="outline"
               className="w-full text-sm hover:bg-gray-50 transition-colors duration-200"
-              style={{ borderColor: '#8BBAB8', color: '#8BBAB8' }}
+              style={{ borderColor: '#214140', color: '#214140' }}
             >
               Request Quote for Large Orders
             </Button>
