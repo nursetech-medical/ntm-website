@@ -210,7 +210,6 @@ const TestimonialsSection = () => {
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Button
                   onClick={handleStartTrial}
-                  disabled={isLoadingTrial}
                   size="lg"
                   className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-all duration-200 transform hover:scale-105"
                   style={{ backgroundColor: '#214140', color: 'white' }}
