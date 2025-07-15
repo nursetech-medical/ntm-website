@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
-import { ShoppingCart, Menu, X, Search } from 'lucide-react';
+import { ShoppingCart, Menu, X, Search, Phone } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
 import CartDropdown from './CartDropdown';
 import { Badge } from './ui/badge';
@@ -26,16 +26,16 @@ const Header = () => {
     {
       label: 'Product',
       items: [
-        { label: 'Cordflex™ Clip Overview', path: '/' },
-        { label: 'Clinical Evidence', path: '/#clinical-evidence' },
-        { label: 'How It Works', path: '/#how-it-works' },
+        { label: 'Cordflex™ Clip Overview', path: '/product-overview' },
+        { label: 'Clinical Evidence', path: '/clinical-evidence' },
+        { label: 'How It Works', path: '/how-it-works' },
         { label: 'Order Now', path: '/order-now' }
       ]
     },
     {
       label: 'Resources',
       items: [
-        { label: 'Resource Center', path: '/resources' },
+        { label: 'Resource Library', path: '/resource-library' },
         { label: 'Blog', path: '/blog' },
         { label: 'News & Press', path: '/news' },
         { label: 'FAQs', path: '/faq' }
@@ -61,6 +61,10 @@ const Header = () => {
     window.location.href = '/trial-request';
   };
 
+  const handleCallNow = () => {
+    window.location.href = 'tel:+14108354089';
+  };
+
   return (
     <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'bg-white shadow-lg py-2' : 'bg-white/95 backdrop-blur-sm py-4'
@@ -76,6 +80,20 @@ const Header = () => {
               Nursetech Medical
             </div>
           </Link>
+
+          {/* Call Now Button */}
+          <div className="hidden lg:flex items-center space-x-4">
+            <Button
+              onClick={handleCallNow}
+              variant="outline"
+              size="sm"
+              className="border-2 hover:bg-green-50 transition-colors duration-200"
+              style={{ borderColor: '#1F8051', color: '#1F8051' }}
+            >
+              <Phone className="h-4 w-4 mr-2" />
+              Call Now
+            </Button>
+          </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
@@ -173,6 +191,17 @@ const Header = () => {
         {isMenuOpen && (
           <div className="lg:hidden mt-4 py-4 border-t border-gray-200">
             <nav className="flex flex-col space-y-4">
+              {/* Call Now Button for Mobile */}
+              <Button
+                onClick={handleCallNow}
+                variant="outline"
+                className="border-2 hover:bg-green-50 transition-colors duration-200 mb-4"
+                style={{ borderColor: '#1F8051', color: '#1F8051' }}
+              >
+                <Phone className="h-4 w-4 mr-2" />
+                Call Now: (410) 835-4089
+              </Button>
+
               {navigationItems.map((item, index) => (
                 <div key={index}>
                   {item.path ? (
@@ -234,13 +263,24 @@ const Header = () => {
 
       {/* Mobile Sticky Bottom Bar */}
       <div className="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 z-40">
-        <Button
-          onClick={handleTrialRequest}
-          className="w-full hover:opacity-90 transition-opacity duration-200"
-          style={{ backgroundColor: '#214140', color: 'white' }}
-        >
-          Request a Trial
-        </Button>
+        <div className="flex space-x-2">
+          <Button
+            onClick={handleCallNow}
+            variant="outline"
+            className="flex-1 border-2 hover:bg-green-50 transition-colors duration-200"
+            style={{ borderColor: '#1F8051', color: '#1F8051' }}
+          >
+            <Phone className="h-4 w-4 mr-2" />
+            Call
+          </Button>
+          <Button
+            onClick={handleTrialRequest}
+            className="flex-1 hover:opacity-90 transition-opacity duration-200"
+            style={{ backgroundColor: '#214140', color: 'white' }}
+          >
+            Request Trial
+          </Button>
+        </div>
       </div>
     </header>
   );

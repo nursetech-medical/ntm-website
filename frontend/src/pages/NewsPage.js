@@ -5,7 +5,8 @@ import AnimatedSection from '../components/AnimatedSection';
 import StaggeredList from '../components/StaggeredList';
 import { Card, CardContent, CardHeader, CardTitle } from '../components/ui/card';
 import { Badge } from '../components/ui/badge';
-import { Calendar, ExternalLink, Award, Newspaper } from 'lucide-react';
+import { Button } from '../components/ui/button';
+import { Calendar, ExternalLink, Award, Newspaper, FileText, Users } from 'lucide-react';
 
 const NewsPage = () => {
   const newsItems = [
@@ -16,7 +17,8 @@ const NewsPage = () => {
       date: "2024-01-20",
       category: "FDA Approval",
       type: "press-release",
-      external: false
+      external: false,
+      featured: true
     },
     {
       id: 2,
@@ -25,7 +27,8 @@ const NewsPage = () => {
       date: "2024-01-18",
       category: "Research",
       type: "study",
-      external: false
+      external: false,
+      featured: false
     },
     {
       id: 3,
@@ -34,7 +37,8 @@ const NewsPage = () => {
       date: "2024-01-15",
       category: "Awards",
       type: "award",
-      external: false
+      external: false,
+      featured: false
     },
     {
       id: 4,
@@ -43,7 +47,8 @@ const NewsPage = () => {
       date: "2024-01-12",
       category: "Partnerships",
       type: "announcement",
-      external: false
+      external: false,
+      featured: false
     },
     {
       id: 5,
@@ -53,7 +58,8 @@ const NewsPage = () => {
       category: "Media Coverage",
       type: "media",
       external: true,
-      link: "https://example.com/modern-healthcare-feature"
+      link: "https://example.com/modern-healthcare-feature",
+      featured: false
     },
     {
       id: 6,
@@ -63,7 +69,8 @@ const NewsPage = () => {
       category: "Publications",
       type: "publication",
       external: true,
-      link: "https://example.com/critical-care-publication"
+      link: "https://example.com/critical-care-publication",
+      featured: false
     }
   ];
 
@@ -96,9 +103,19 @@ const NewsPage = () => {
         return <Award className="h-5 w-5" />;
       case 'study':
       case 'publication':
-        return <ExternalLink className="h-5 w-5" />;
+        return <FileText className="h-5 w-5" />;
+      case 'media':
+        return <Users className="h-5 w-5" />;
       default:
         return <Newspaper className="h-5 w-5" />;
+    }
+  };
+
+  const handleItemClick = (item) => {
+    if (item.external && item.link) {
+      window.open(item.link, '_blank');
+    } else {
+      console.log('Navigate to news item:', item.title);
     }
   };
 
@@ -123,8 +140,64 @@ const NewsPage = () => {
           </div>
         </section>
 
-        {/* Latest News */}
+        {/* Featured News */}
         <section className="py-20" style={{ backgroundColor: '#DFEAF0' }}>
+          <div className="container mx-auto px-4">
+            <AnimatedSection animation="fade-up">
+              <div className="text-center mb-16">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4" style={{ color: '#214140' }}>
+                  Featured News
+                </h2>
+                <p className="text-xl text-gray-600">
+                  Latest milestone achievements and announcements
+                </p>
+              </div>
+            </AnimatedSection>
+
+            {newsItems.filter(item => item.featured).map((item) => (
+              <AnimatedSection key={item.id} animation="scale-up">
+                <Card className="max-w-4xl mx-auto bg-white shadow-xl hover:shadow-2xl transition-shadow duration-300">
+                  <CardHeader className="pb-4">
+                    <div className="flex items-center justify-between mb-4">
+                      <Badge style={{ backgroundColor: '#8BBAB8', color: 'white' }}>
+                        {item.category}
+                      </Badge>
+                      <div className="flex items-center space-x-4 text-sm text-gray-600">
+                        <div className="flex items-center space-x-1">
+                          {getIcon(item.type)}
+                          <span>{item.type.replace('-', ' ')}</span>
+                        </div>
+                        <div className="flex items-center space-x-1">
+                          <Calendar className="h-4 w-4" />
+                          <span>{new Date(item.date).toLocaleDateString()}</span>
+                        </div>
+                      </div>
+                    </div>
+                    <CardTitle className="text-2xl lg:text-3xl" style={{ color: '#214140' }}>
+                      {item.title}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <p className="text-gray-600 text-lg leading-relaxed mb-6">
+                      {item.excerpt}
+                    </p>
+                    <Button
+                      onClick={() => handleItemClick(item)}
+                      className="inline-flex items-center space-x-2 hover:opacity-90 transition-opacity duration-200"
+                      style={{ backgroundColor: '#214140', color: 'white' }}
+                    >
+                      <span>Read Full Article</span>
+                      {item.external && <ExternalLink className="h-4 w-4" />}
+                    </Button>
+                  </CardContent>
+                </Card>
+              </AnimatedSection>
+            ))}
+          </div>
+        </section>
+
+        {/* Latest News */}
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-up">
               <div className="text-center mb-16">
@@ -138,8 +211,12 @@ const NewsPage = () => {
             </AnimatedSection>
 
             <StaggeredList delay={150} className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-              {newsItems.map((item) => (
-                <Card key={item.id} className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 group">
+              {newsItems.filter(item => !item.featured).map((item) => (
+                <Card 
+                  key={item.id} 
+                  className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 group cursor-pointer"
+                  onClick={() => handleItemClick(item)}
+                >
                   <CardHeader className="pb-3">
                     <div className="flex items-center justify-between mb-3">
                       <Badge variant="secondary" style={{ backgroundColor: '#DFEAF0', color: '#214140' }}>
@@ -163,13 +240,13 @@ const NewsPage = () => {
                         <Calendar className="h-3 w-3" />
                         <span>{new Date(item.date).toLocaleDateString()}</span>
                       </div>
-                      <button className="text-teal-600 hover:text-teal-800 font-medium transition-colors duration-200">
+                      <div className="text-teal-600 hover:text-teal-800 font-medium transition-colors duration-200">
                         {item.external ? (
                           <ExternalLink className="h-4 w-4" />
                         ) : (
                           <span>Read More</span>
                         )}
-                      </button>
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -179,14 +256,14 @@ const NewsPage = () => {
         </section>
 
         {/* Press Releases */}
-        <section className="py-20 bg-white">
+        <section className="py-20" style={{ backgroundColor: '#273139' }}>
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-up">
               <div className="text-center mb-16">
-                <h2 className="text-3xl lg:text-4xl font-bold mb-4" style={{ color: '#214140' }}>
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4 text-white">
                   Press Releases
                 </h2>
-                <p className="text-xl text-gray-600">
+                <p className="text-xl text-gray-300 max-w-2xl mx-auto">
                   Official company announcements
                 </p>
               </div>
@@ -196,24 +273,30 @@ const NewsPage = () => {
               <StaggeredList delay={100} className="space-y-6">
                 {pressReleases.map((release) => (
                   <AnimatedSection key={release.id} animation="fade-left">
-                    <Card className="shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
                       <CardContent className="p-6">
                         <div className="flex items-start justify-between">
                           <div className="flex-1">
+                            <div className="flex items-center space-x-3 mb-2">
+                              <Badge style={{ backgroundColor: '#8BBAB8', color: 'white' }}>
+                                Press Release
+                              </Badge>
+                              <div className="flex items-center space-x-1 text-sm text-gray-500">
+                                <Calendar className="h-3 w-3" />
+                                <span>{new Date(release.date).toLocaleDateString()}</span>
+                              </div>
+                            </div>
                             <h3 className="text-xl font-semibold mb-2 hover:text-teal-600 transition-colors duration-200 cursor-pointer" style={{ color: '#214140' }}>
                               {release.title}
                             </h3>
                             <p className="text-gray-600 mb-3">
                               {release.excerpt}
                             </p>
-                            <div className="flex items-center space-x-1 text-sm text-gray-500">
-                              <Calendar className="h-3 w-3" />
-                              <span>{new Date(release.date).toLocaleDateString()}</span>
-                            </div>
                           </div>
-                          <button className="ml-4 text-teal-600 hover:text-teal-800 transition-colors duration-200">
-                            <ExternalLink className="h-5 w-5" />
-                          </button>
+                          <Button variant="outline" size="sm" className="ml-4">
+                            <ExternalLink className="h-4 w-4 mr-2" />
+                            Read More
+                          </Button>
                         </div>
                       </CardContent>
                     </Card>
@@ -225,45 +308,48 @@ const NewsPage = () => {
         </section>
 
         {/* Media Kit */}
-        <section className="py-20" style={{ backgroundColor: '#273139' }}>
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-up">
               <div className="text-center max-w-3xl mx-auto">
-                <h2 className="text-3xl lg:text-4xl font-bold mb-6 text-white">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-6" style={{ color: '#214140' }}>
                   Media Kit
                 </h2>
-                <p className="text-xl text-gray-300 mb-8 leading-relaxed">
+                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
                   Access high-resolution images, company logos, press releases, and executive bios for media coverage.
                 </p>
                 <div className="grid md:grid-cols-2 gap-6 mb-8">
-                  <div className="bg-white/10 rounded-lg p-6 text-left">
-                    <h3 className="text-lg font-semibold text-white mb-2">Brand Assets</h3>
-                    <p className="text-gray-300 text-sm mb-4">Logos, product images, and brand guidelines</p>
-                    <button className="text-teal-400 hover:text-teal-300 font-medium">
-                      Download →
-                    </button>
+                  <div className="bg-gray-50 rounded-lg p-6 text-left">
+                    <h3 className="text-lg font-semibold mb-2" style={{ color: '#214140' }}>Brand Assets</h3>
+                    <p className="text-gray-600 text-sm mb-4">Logos, product images, and brand guidelines</p>
+                    <Button variant="outline" size="sm">
+                      <FileText className="h-4 w-4 mr-2" />
+                      Download
+                    </Button>
                   </div>
-                  <div className="bg-white/10 rounded-lg p-6 text-left">
-                    <h3 className="text-lg font-semibold text-white mb-2">Executive Bios</h3>
-                    <p className="text-gray-300 text-sm mb-4">Leadership team profiles and headshots</p>
-                    <button className="text-teal-400 hover:text-teal-300 font-medium">
-                      Download →
-                    </button>
+                  <div className="bg-gray-50 rounded-lg p-6 text-left">
+                    <h3 className="text-lg font-semibold mb-2" style={{ color: '#214140' }}>Executive Bios</h3>
+                    <p className="text-gray-600 text-sm mb-4">Leadership team profiles and headshots</p>
+                    <Button variant="outline" size="sm">
+                      <Users className="h-4 w-4 mr-2" />
+                      Download
+                    </Button>
                   </div>
                 </div>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <button
+                  <Button
                     className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundColor: '#8BBAB8', color: 'white' }}
                   >
                     Request Interview
-                  </button>
-                  <button
+                  </Button>
+                  <Button
                     className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200"
-                    style={{ backgroundColor: '#1F8051', color: 'white' }}
+                    style={{ backgroundColor: '#214140', color: 'white' }}
+                    onClick={() => window.location.href = '/contact'}
                   >
                     Contact Media Relations
-                  </button>
+                  </Button>
                 </div>
               </div>
             </AnimatedSection>
