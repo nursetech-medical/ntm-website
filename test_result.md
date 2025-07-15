@@ -546,13 +546,52 @@ FINAL SUMMARY: ✅ ALL REQUESTED CHANGES SUCCESSFULLY IMPLEMENTED
         - comment: "✅ Mobile floating action widget fully functional. Mobile bottom bar found with Call and Request Trial buttons. Widget appears correctly on mobile viewport (390x844). Call button and Request Trial button both present and functional in floating action widget."
 
   - task: "Header Button Color Consistency - Request a Sample Button"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/Header.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+        - agent: "testing"
+        - comment: "❌ CRITICAL ISSUE: Header 'Request a Sample' button still uses old color #8BBAB8 instead of new contrast color #214140. Hero section button correctly uses #214140, but header button on line 165 needs to be updated from borderColor: '#8BBAB8' to borderColor: '#214140' for consistency and better contrast."
+        - working: true
+        - agent: "testing"
+        - comment: "✅ FIXED: Header 'Request a Sample' button now correctly uses NEW contrast color #214140 (rgb(33, 65, 64)). Both hero section and header buttons now have consistent styling with improved contrast. Button color improvements successfully implemented across all pages."
+
+  - task: "Mobile Floating Header - Order Now Button Implementation"
     implemented: false
     working: false
     file: "/app/frontend/src/components/Header.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: true
+    status_history:
+        - working: false
+        - agent: "testing"
+        - comment: "❌ CRITICAL ISSUE: Mobile sticky bar shows 'Order Now' button but it does not navigate to /order-now page. Button click handler is not working properly. The onclick handler shows 'function noop$1() {}' indicating the click event is not properly bound. Need to fix the navigation functionality for the Order Now button in mobile sticky bar."
+
+  - task: "Sterile Badge Removal from Order Now Page"
+    implemented: false
+    working: false
+    file: "/app/frontend/src/pages/OrderNowPage.js"
     stuck_count: 0
     priority: "high"
     needs_retesting: true
     status_history:
         - working: false
         - agent: "testing"
-        - comment: "❌ CRITICAL ISSUE: Header 'Request a Sample' button still uses old color #8BBAB8 instead of new contrast color #214140. Hero section button correctly uses #214140, but header button on line 165 needs to be updated from borderColor: '#8BBAB8' to borderColor: '#214140' for consistency and better contrast."
+        - comment: "❌ CRITICAL ISSUE: 'Sterile' badges still found on Order Now page in product cards. Each product (Starter Kit, ICU Bundle, Department Pack) still shows 'Sterile' badge. These need to be removed as requested. Hero section correctly has 'Sterile' badge removed, but Order Now page still contains multiple 'Sterile' badges."
+
+  - task: "Search Functionality and Previous Improvements Verification"
+    implemented: true
+    working: true
+    file: "/app/frontend/src/components/SearchModal.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: true
+        - agent: "testing"
+        - comment: "✅ Search functionality fully working. Search modal opens correctly, search input functional, search for 'trial' returns 2 results (Clinical Evidence, Request a Trial), search results are clickable and navigate correctly. ESC key closes modal properly. /ip route working correctly with 'Intellectual Property' page title. Navigation buttons working: 6 'Request a Trial' buttons and 4 'Request a Sample' buttons all navigate to correct pages."
