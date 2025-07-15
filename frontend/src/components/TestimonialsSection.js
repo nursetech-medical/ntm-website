@@ -64,40 +64,8 @@ const TestimonialsSection = () => {
     setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
   };
 
-  const handleStartTrial = async () => {
-    setIsLoadingTrial(true);
-    try {
-      const response = await contactApi.trialRequest({
-        name: 'Trial Request',
-        title: 'Healthcare Professional',
-        email: 'trial@example.com',
-        phone: '',
-        hospital: 'Sample Hospital',
-        department: 'ICU',
-        beds: 30,
-        current_solution: 'Manual management',
-        challenges: ['Line tangles', 'Patient safety'],
-        start_date: new Date().toISOString(),
-        timeline: '3 months',
-        stakeholders: 'Nursing staff'
-      });
-      
-      toast({
-        title: "Trial Request Submitted",
-        description: response.data.message,
-        duration: 5000,
-      });
-    } catch (error) {
-      const apiError = handleApiError(error);
-      toast({
-        title: "Error",
-        description: apiError.message,
-        variant: "destructive",
-        duration: 5000,
-      });
-    } finally {
-      setIsLoadingTrial(false);
-    }
+  const handleStartTrial = () => {
+    window.location.href = '/trial-request';
   };
 
   const handleReadCaseStudies = () => {
