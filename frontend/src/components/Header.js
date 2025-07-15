@@ -207,7 +207,7 @@ const Header = () => {
                 style={{ borderColor: '#1F8051', color: '#1F8051' }}
               >
                 <Phone className="h-4 w-4 mr-2" />
-                Call Now: (410) 835-4089
+                Call Now: 1-800-CORDFLEX
               </Button>
 
               {navigationItems.map((item, index) => (
