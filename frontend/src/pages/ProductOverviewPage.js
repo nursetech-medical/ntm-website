@@ -221,7 +221,7 @@ const ProductOverviewPage = () => {
                     style={{ backgroundColor: '#214140', color: 'white' }}
                     onClick={() => window.location.href = '/trial-request'}
                   >
-                    Start Your Trial
+                    Request a Trial
                   </Button>
                 </div>
               </div>
