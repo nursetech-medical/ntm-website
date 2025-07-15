@@ -286,7 +286,7 @@ const HowItWorksPage = () => {
                   <Button
                     variant="outline"
                     className="px-8 py-4 text-lg font-semibold border-2 hover:bg-teal-50 transition-colors duration-200"
-                    style={{ borderColor: '#8BBAB8', color: '#8BBAB8' }}
+                    style={{ borderColor: '#214140', color: '#214140' }}
                     onClick={() => window.location.href = '/videos'}
                   >
                     <Play className="h-5 w-5 mr-2" />
