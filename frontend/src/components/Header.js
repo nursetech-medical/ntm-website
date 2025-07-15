@@ -295,6 +295,12 @@ const Header = () => {
           </Button>
         </div>
       </div>
+      
+      {/* Search Modal */}
+      <SearchModal 
+        isOpen={isSearchModalOpen} 
+        onClose={() => setIsSearchModalOpen(false)} 
+      />
     </header>
   );
 };
