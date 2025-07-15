@@ -211,7 +211,7 @@ const Footer = () => {
                     className="hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundColor: '#214140', color: 'white' }}
                   >
-                    {isLoadingTrial ? 'Processing...' : 'Start Your Trial'}
+                    {isLoadingTrial ? 'Processing...' : 'Request a Trial'}
                   </Button>
                 </div>
                 <div className="mt-4 space-y-2">
