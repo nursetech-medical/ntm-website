@@ -466,10 +466,9 @@ metadata:
 
 test_plan:
   current_focus:
-    - "All major functionality tested and working"
-    - "All requested changes successfully implemented and verified"
+    - "Header Button Color Consistency - Request a Sample Button"
   stuck_tasks: []
-  test_all: true
+  test_all: false
   test_priority: "high_first"
 
 agent_communication:
