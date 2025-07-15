@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import { Button } from './ui/button';
 import { ShoppingCart, Menu, X, Search } from 'lucide-react';
 import { useCart } from '../contexts/CartContext';
@@ -10,6 +11,7 @@ const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isCartDropdownOpen, setIsCartDropdownOpen] = useState(false);
   const { getTotalItems } = useCart();
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,37 +26,39 @@ const Header = () => {
     {
       label: 'Product',
       items: [
-        'Cordflex™ Clip Overview',
-        'Clinical Evidence',
-        'How It Works'
+        { label: 'Cordflex™ Clip Overview', path: '/' },
+        { label: 'Clinical Evidence', path: '/#clinical-evidence' },
+        { label: 'How It Works', path: '/#how-it-works' },
+        { label: 'Order Now', path: '/order-now' }
       ]
     },
     {
       label: 'Resources',
       items: [
-        'Resource Center',
-        'Blog',
-        'News & Press'
+        { label: 'Resource Center', path: '/resources' },
+        { label: 'Blog', path: '/blog' },
+        { label: 'News & Press', path: '/news' },
+        { label: 'FAQs', path: '/faq' }
       ]
     },
     {
       label: 'About',
-      items: []
+      items: [],
+      path: '/about'
     },
     {
       label: 'Contact',
-      items: []
+      items: [],
+      path: '/contact'
     }
   ];
 
   const handleSampleRequest = () => {
-    // Mock sample request
-    console.log('Sample request initiated');
+    window.location.href = '/sample-request';
   };
 
   const handleTrialRequest = () => {
-    // Mock trial request
-    console.log('Trial request initiated');
+    window.location.href = '/trial-request';
   };
 
   return (
@@ -64,29 +68,46 @@ const Header = () => {
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
-          <div className="flex items-center space-x-2">
+          <Link to="/" className="flex items-center space-x-3">
+            <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#214140' }}>
+              <span className="text-white font-bold text-xl">N</span>
+            </div>
             <div className="text-2xl font-bold" style={{ color: '#214140' }}>
               Nursetech Medical
             </div>
-          </div>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-8">
             {navigationItems.map((item, index) => (
               <div key={index} className="relative group">
-                <button className="text-gray-700 hover:text-teal-600 transition-colors duration-200 font-medium">
-                  {item.label}
-                </button>
-                {item.items.length > 0 && (
+                {item.path ? (
+                  <Link 
+                    to={item.path} 
+                    className={`transition-colors duration-200 font-medium ${
+                      location.pathname === item.path 
+                        ? 'text-teal-600' 
+                        : 'text-gray-700 hover:text-teal-600'
+                    }`}
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <button className="text-gray-700 hover:text-teal-600 transition-colors duration-200 font-medium">
+                    {item.label}
+                  </button>
+                )}
+                {item.items && item.items.length > 0 && (
                   <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200">
                     <div className="py-2">
                       {item.items.map((subItem, subIndex) => (
-                        <button
+                        <Link
                           key={subIndex}
+                          to={subItem.path}
                           className="block w-full text-left px-4 py-2 text-gray-600 hover:bg-gray-50 hover:text-teal-600 transition-colors duration-200"
                         >
-                          {subItem}
-                        </button>
+                          {subItem.label}
+                        </Link>
                       ))}
                     </div>
                   </div>
@@ -154,18 +175,30 @@ const Header = () => {
             <nav className="flex flex-col space-y-4">
               {navigationItems.map((item, index) => (
                 <div key={index}>
-                  <button className="text-gray-700 hover:text-teal-600 transition-colors duration-200 font-medium">
-                    {item.label}
-                  </button>
-                  {item.items.length > 0 && (
+                  {item.path ? (
+                    <Link 
+                      to={item.path} 
+                      className="text-gray-700 hover:text-teal-600 transition-colors duration-200 font-medium"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <button className="text-gray-700 hover:text-teal-600 transition-colors duration-200 font-medium">
+                      {item.label}
+                    </button>
+                  )}
+                  {item.items && item.items.length > 0 && (
                     <div className="ml-4 mt-2 space-y-2">
                       {item.items.map((subItem, subIndex) => (
-                        <button
+                        <Link
                           key={subIndex}
+                          to={subItem.path}
                           className="block text-sm text-gray-600 hover:text-teal-600 transition-colors duration-200"
+                          onClick={() => setIsMenuOpen(false)}
                         >
-                          {subItem}
-                        </button>
+                          {subItem.label}
+                        </Link>
                       ))}
                     </div>
                   )}
@@ -174,14 +207,20 @@ const Header = () => {
               <div className="flex flex-col space-y-2 pt-4">
                 <Button
                   variant="outline"
-                  onClick={handleSampleRequest}
+                  onClick={() => {
+                    handleSampleRequest();
+                    setIsMenuOpen(false);
+                  }}
                   className="border-2 hover:bg-teal-50 transition-colors duration-200"
                   style={{ borderColor: '#8BBAB8', color: '#8BBAB8' }}
                 >
                   Request a Sample
                 </Button>
                 <Button
-                  onClick={handleTrialRequest}
+                  onClick={() => {
+                    handleTrialRequest();
+                    setIsMenuOpen(false);
+                  }}
                   className="hover:opacity-90 transition-opacity duration-200"
                   style={{ backgroundColor: '#214140', color: 'white' }}
                 >
