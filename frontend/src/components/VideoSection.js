@@ -15,31 +15,8 @@ const VideoSection = () => {
     setIsPlaying(true);
   };
 
-  const handleScheduleDemo = async () => {
-    try {
-      const response = await contactApi.generalContact({
-        name: 'Demo Request',
-        email: 'demo@example.com',
-        phone: '',
-        organization: 'Sample Organization',
-        subject: 'Live Demo Request',
-        message: 'I would like to schedule a live demo of Cordflex'
-      });
-      
-      toast({
-        title: "Demo Request Submitted",
-        description: response.data.message,
-        duration: 5000,
-      });
-    } catch (error) {
-      const apiError = handleApiError(error);
-      toast({
-        title: "Error",
-        description: apiError.message,
-        variant: "destructive",
-        duration: 5000,
-      });
-    }
+  const handleScheduleDemo = () => {
+    window.location.href = '/trial-request';
   };
 
   const handleRequestSample = async () => {
