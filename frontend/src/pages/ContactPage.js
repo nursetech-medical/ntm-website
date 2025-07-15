@@ -280,7 +280,7 @@ const ContactPage = () => {
                     className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundColor: '#1F8051', color: 'white' }}
                   >
-                    Start Your Trial
+                    Request a Trial
                   </Button>
                 </div>
               </div>
