@@ -166,7 +166,7 @@ const VideoSection = () => {
                 variant="outline"
                 size="lg"
                 className="px-8 py-4 text-lg font-semibold border-2 hover:bg-teal-50 transition-all duration-200 transform hover:scale-105"
-                style={{ borderColor: '#8BBAB8', color: '#8BBAB8' }}
+                style={{ borderColor: '#214140', color: '#214140' }}
               >
                 Request a Trial
               </Button>
