@@ -70,7 +70,7 @@ const Header = () => {
   };
 
   const handleCallNow = () => {
-    window.location.href = 'tel:+14108354089';
+    window.location.href = 'tel:+18002673539';
   };
 
   return (
