@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from './ui/button';
 import { Card, CardContent } from './ui/card';
-import { ChevronLeft, ChevronRight, Star, Play } from 'lucide-react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { testimonialsApi, contactApi, handleApiError } from '../services/api';
 import { useToast } from '../hooks/use-toast';
 import AnimatedSection from './AnimatedSection';
@@ -31,24 +31,63 @@ const TestimonialsSection = () => {
           name: "Sarah Johnson",
           title: "ICU Nurse Manager",
           hospital: "Large Urban Hospital",
-          content: "The Cordflex Clip has saved our unit countless hours in line management. It's a small investment with massive returns.",
-          rating: 5
+          content: "The Cordflex Clip has saved our unit countless hours in line management. It's a small investment with massive returns."
         },
         {
           id: 2,
           name: "Michael Chen",
           title: "Staff Nurse",
           hospital: "Level 1 Trauma Center",
-          content: "I used to dread patient transfers due to tangles and pullouts, but Cordflex makes it seamless.",
-          rating: 5
+          content: "I used to dread patient transfers due to tangles and pullouts, but Cordflex makes it seamless."
         },
         {
           id: 3,
           name: "Lisa Rodriguez",
           title: "Quality Director",
           hospital: "Community Hospital",
-          content: "We saw a 40% reduction in line pullouts within our first month of implementation.",
-          rating: 5
+          content: "We saw a 40% reduction in line pullouts within our first month of implementation."
+        },
+        {
+          id: 4,
+          name: "Jennifer Martinez",
+          title: "Clinical Educator",
+          hospital: "Regional Medical Center",
+          content: "Training staff on Cordflex took less than 5 minutes. The design is so intuitive that nurses immediately understood how to use it."
+        },
+        {
+          id: 5,
+          name: "Dr. Robert Thompson",
+          title: "ICU Director",
+          hospital: "Academic Medical Center",
+          content: "Since implementing Cordflex, we've seen a significant decrease in line-related complications and improved patient mobility."
+        },
+        {
+          id: 6,
+          name: "Amanda Williams",
+          title: "Charge Nurse",
+          hospital: "Children's Hospital",
+          content: "Cordflex has been a game-changer in our PICU. The ability to safely manage multiple lines during patient care has improved our workflow tremendously."
+        },
+        {
+          id: 7,
+          name: "David Park",
+          title: "Staff Nurse",
+          hospital: "Trauma Center",
+          content: "As someone who works in a fast-paced trauma ICU, Cordflex helps me stay organized and focused on what matters most - patient care."
+        },
+        {
+          id: 8,
+          name: "Emily Richardson",
+          title: "Nurse Supervisor",
+          hospital: "Community Hospital",
+          content: "The reduction in callbacks and line management issues has been remarkable. Our nurses are happier and more efficient."
+        },
+        {
+          id: 9,
+          name: "James Sullivan",
+          title: "Critical Care Nurse",
+          hospital: "University Hospital",
+          content: "I've been a critical care nurse for 15 years, and Cordflex is one of the most practical innovations I've seen for line management."
         }
       ]);
     } finally {
@@ -57,11 +96,31 @@ const TestimonialsSection = () => {
   };
 
   const nextTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    // Move forward by 3, or loop back if we're near the end
+    setCurrentTestimonial((prev) => {
+      const next = prev + 3;
+      return next >= testimonials.length ? 0 : next;
+    });
   };
 
   const prevTestimonial = () => {
-    setCurrentTestimonial((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+    // Move backward by 3, or loop to end if we're at the start
+    setCurrentTestimonial((prev) => {
+      const previous = prev - 3;
+      return previous < 0 ? Math.max(0, testimonials.length - 3) : previous;
+    });
+  };
+
+  // Get the current set of 3 testimonials to display
+  const getVisibleTestimonials = () => {
+    const visible = [];
+    for (let i = 0; i < 3; i++) {
+      const index = (currentTestimonial + i) % testimonials.length;
+      if (testimonials[index]) {
+        visible.push(testimonials[index]);
+      }
+    }
+    return visible;
   };
 
   const handleStartTrial = () => {
@@ -70,15 +129,6 @@ const TestimonialsSection = () => {
 
   const handleReadCaseStudies = () => {
     window.location.href = '/case-studies';
-  };
-
-  const renderStars = (rating) => {
-    return Array.from({ length: 5 }, (_, i) => (
-      <Star
-        key={i}
-        className={`h-5 w-5 ${i < rating ? 'text-yellow-400 fill-current' : 'text-gray-300'}`}
-      />
-    ));
   };
 
   if (isLoading) {
@@ -108,79 +158,62 @@ const TestimonialsSection = () => {
           </div>
         </AnimatedSection>
 
-        <div className="max-w-4xl mx-auto">
-          {/* Testimonial Carousel */}
+        <div className="max-w-7xl mx-auto">
+          {/* Testimonial Carousel - 3 at a time */}
           <AnimatedSection animation="scale-up" delay={200}>
             <div className="relative mb-12">
-              <Card className="bg-white shadow-xl">
-                <CardContent className="p-12">
-                  <div className="relative">
-                    {/* Navigation Buttons */}
-                    <button
-                      onClick={prevTestimonial}
-                      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 p-3 rounded-full hover:bg-gray-100 transition-colors duration-200 z-10"
-                    >
-                      <ChevronLeft className="h-8 w-8 text-gray-600" />
-                    </button>
+              {/* Navigation Buttons */}
+              {testimonials.length > 3 && (
+                <>
+                  <button
+                    onClick={prevTestimonial}
+                    className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 lg:-translate-x-12 p-3 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-all duration-200 z-10"
+                    style={{ border: '2px solid #8BBAB8' }}
+                  >
+                    <ChevronLeft className="h-6 w-6" style={{ color: '#214140' }} />
+                  </button>
 
-                    <button
-                      onClick={nextTestimonial}
-                      className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 p-3 rounded-full hover:bg-gray-100 transition-colors duration-200 z-10"
-                    >
-                      <ChevronRight className="h-8 w-8 text-gray-600" />
-                    </button>
+                  <button
+                    onClick={nextTestimonial}
+                    className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 lg:translate-x-12 p-3 rounded-full bg-white shadow-lg hover:bg-gray-50 transition-all duration-200 z-10"
+                    style={{ border: '2px solid #8BBAB8' }}
+                  >
+                    <ChevronRight className="h-6 w-6" style={{ color: '#214140' }} />
+                  </button>
+                </>
+              )}
 
-                    {/* Content */}
-                    <div className="text-center px-8">
-                      <div className="flex justify-center mb-6">
-                        {renderStars(testimonials[currentTestimonial]?.rating || 5)}
-                      </div>
-
-                      <blockquote className="text-xl lg:text-2xl text-gray-700 italic mb-8 leading-relaxed">
-                        "{testimonials[currentTestimonial]?.content}"
+              {/* Three Testimonials Grid */}
+              <div className="grid md:grid-cols-3 gap-6">
+                {getVisibleTestimonials().map((testimonial, index) => (
+                  <Card key={testimonial.id} className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+                    <CardContent className="p-6 flex flex-col h-full">
+                      {/* Quote */}
+                      <blockquote className="text-gray-700 italic mb-6 leading-relaxed flex-grow">
+                        "{testimonial.content}"
                       </blockquote>
 
-                      <div className="flex items-center justify-center space-x-4">
-                        <div className="w-16 h-16 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center">
-                          <span className="text-white font-bold text-lg">
-                            {testimonials[currentTestimonial]?.name.split(' ').map(n => n[0]).join('')}
-                          </span>
+                      {/* Author Info - No Avatar */}
+                      <div className="pt-4 border-t border-gray-100">
+                        <div className="font-semibold text-gray-800" style={{ color: '#214140' }}>
+                          {testimonial.name}
                         </div>
-                        <div className="text-left">
-                          <div className="font-semibold text-gray-800 text-lg">
-                            {testimonials[currentTestimonial]?.name}
-                          </div>
-                          <div className="text-gray-600">
-                            {testimonials[currentTestimonial]?.title}
-                          </div>
-                          <div className="text-sm text-gray-500">
-                            {testimonials[currentTestimonial]?.hospital}
-                          </div>
+                        <div className="text-sm text-gray-600">
+                          {testimonial.title}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          {testimonial.hospital}
                         </div>
                       </div>
-
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
-
-              {/* Testimonial Dots */}
-              <div className="flex justify-center mt-6 space-x-2">
-                {testimonials.map((_, index) => (
-                  <button
-                    key={index}
-                    onClick={() => setCurrentTestimonial(index)}
-                    className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                      index === currentTestimonial ? 'bg-teal-600' : 'bg-gray-300'
-                    }`}
-                  />
+                    </CardContent>
+                  </Card>
                 ))}
               </div>
             </div>
           </AnimatedSection>
 
-          {/* Hospital Logos */}
-          <AnimatedSection animation="fade-up" delay={300}>
+          {/* Hospital Logos - TEMPORARILY HIDDEN until Cordflex is deployed in hospitals */}
+          {/* <AnimatedSection animation="fade-up" delay={300}>
             <div className="text-center mb-12">
               <p className="text-gray-600 mb-6">Trusted by leading healthcare institutions</p>
               <StaggeredList delay={100} className="flex justify-center items-center space-x-8 opacity-60">
@@ -191,7 +224,7 @@ const TestimonialsSection = () => {
                 ))}
               </StaggeredList>
             </div>
-          </AnimatedSection>
+          </AnimatedSection> */}
 
           {/* CTA Section */}
           <AnimatedSection animation="fade-up" delay={400}>

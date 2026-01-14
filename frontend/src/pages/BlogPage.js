@@ -145,7 +145,11 @@ const BlogPage = () => {
                         <span>{post.readTime}</span>
                       </div>
                     </div>
-                    <CardTitle className="text-2xl lg:text-3xl" style={{ color: '#214140' }}>
+                    <CardTitle
+                      className="text-2xl lg:text-3xl cursor-pointer hover:text-teal-600 transition-colors duration-200"
+                      style={{ color: '#214140' }}
+                      onClick={() => window.location.href = `/blog/${post.id}`}
+                    >
                       {post.title}
                     </CardTitle>
                   </CardHeader>
@@ -191,7 +195,10 @@ const BlogPage = () => {
                       </Badge>
                       <span className="text-sm text-gray-500">{post.readTime}</span>
                     </div>
-                    <CardTitle className="text-lg group-hover:text-teal-600 transition-colors duration-200">
+                    <CardTitle
+                      className="text-lg cursor-pointer group-hover:text-teal-600 transition-colors duration-200"
+                      onClick={() => window.location.href = `/blog/${post.id}`}
+                    >
                       {post.title}
                     </CardTitle>
                   </CardHeader>
