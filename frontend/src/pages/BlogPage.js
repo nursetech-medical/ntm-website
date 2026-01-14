@@ -153,7 +153,10 @@ const BlogPage = () => {
                     <p className="text-gray-600 text-lg leading-relaxed mb-6">
                       {post.excerpt}
                     </p>
-                    <button className="inline-flex items-center space-x-2 text-teal-600 hover:text-teal-800 font-medium transition-colors duration-200">
+                    <button
+                      onClick={() => window.location.href = `/blog/${post.id}`}
+                      className="inline-flex items-center space-x-2 text-teal-600 hover:text-teal-800 font-medium transition-colors duration-200"
+                    >
                       <span>Read Full Article</span>
                       <ArrowRight className="h-4 w-4" />
                     </button>
@@ -207,7 +210,10 @@ const BlogPage = () => {
                           <span>{new Date(post.date).toLocaleDateString()}</span>
                         </div>
                       </div>
-                      <button className="text-teal-600 hover:text-teal-800 font-medium transition-colors duration-200">
+                      <button
+                        onClick={() => window.location.href = `/blog/${post.id}`}
+                        className="text-teal-600 hover:text-teal-800 font-medium transition-colors duration-200"
+                      >
                         <ArrowRight className="h-4 w-4" />
                       </button>
                     </div>

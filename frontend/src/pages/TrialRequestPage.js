@@ -15,6 +15,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '../components/ui/popove
 import { CalendarIcon } from 'lucide-react';
 import { format } from 'date-fns';
 import { contactApi, handleApiError } from '../services/api';
+import emailService from '../services/emailService';
 import { useToast } from '../hooks/use-toast';
 
 const TrialRequestPage = () => {
@@ -54,9 +55,9 @@ const TrialRequestPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     try {
-      const response = await contactApi.trialRequest({
+      const requestData = {
         name: `${formData.firstName} ${formData.lastName}`,
         title: formData.role,
         email: formData.email,
@@ -68,15 +69,29 @@ const TrialRequestPage = () => {
         challenges: ['Line management efficiency'],
         start_date: formData.preferredDate ? formData.preferredDate.toISOString() : new Date().toISOString(),
         timeline: '3 months',
-        stakeholders: `Role: ${formData.role}, Unit: ${formData.unit}, Hospital Address: ${formData.hospitalAddress}, Requested Sample: ${formData.requestedSample}, Comments: ${formData.otherComments}`
-      });
-      
-      toast({
-        title: "Trial Request Submitted Successfully",
-        description: response.data.message,
-        duration: 5000,
-      });
-      
+        stakeholders: `Role: ${formData.role}, Unit: ${formData.unit}, Hospital Address: ${formData.hospitalAddress}, Requested Sample: ${formData.requestedSample}`,
+        comments: formData.otherComments
+      };
+
+      // Try backend API first, fallback to email service
+      let response;
+      try {
+        response = await contactApi.trialRequest(requestData);
+        toast({
+          title: "Trial Request Submitted",
+          description: response.data.message,
+          duration: 5000,
+        });
+      } catch (apiError) {
+        // Fallback to email service
+        response = await emailService.sendTrialRequest(requestData);
+        toast({
+          title: "Trial Request Submitted",
+          description: response.message,
+          duration: 5000,
+        });
+      }
+
       // Reset form
       setFormData({
         firstName: '',
@@ -91,11 +106,11 @@ const TrialRequestPage = () => {
         requestedSample: false,
         otherComments: ''
       });
+
     } catch (error) {
-      const apiError = handleApiError(error);
       toast({
         title: "Error",
-        description: apiError.message,
+        description: error.message || 'Failed to submit trial request. Please try again.',
         variant: "destructive",
         duration: 5000,
       });

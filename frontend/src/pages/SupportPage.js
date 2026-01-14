@@ -36,7 +36,7 @@ const SupportPage = () => {
       title: "Technical Support",
       description: "Get help with device setup, troubleshooting, and technical issues",
       icon: <Phone className="h-8 w-8" />,
-      contact: "1-800-CORDFLEX",
+      contact: "(410) 835-4089",
       hours: "24/7 Available",
       urgency: "Emergency",
       color: "#214140"
@@ -83,7 +83,7 @@ const SupportPage = () => {
     {
       category: 'setup',
       question: 'How long does it take to set up Cordflex?',
-      answer: 'Cordflex setup typically takes 30 seconds or less per connection. Our design prioritizes quick implementation to minimize workflow disruption.'
+      answer: 'Cordflex setup typically takes less than 30 seconds per connection. Our design prioritizes quick implementation to minimize workflow disruption.'
     },
     {
       category: 'setup',
@@ -176,7 +176,7 @@ const SupportPage = () => {
                     style={{ backgroundColor: '#214140', color: 'white' }}
                   >
                     <Phone className="h-5 w-5 mr-2" />
-                    Call Support: 1-800-CORDFLEX
+                    Call Support: (410) 835-4089
                   </Button>
                   <Button
                     variant="outline"

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl:*)",
+      "Bash(git commit -m \"$\\(cat <<''EOF''\nAdd ROI calculator, reorganize resources, expand FAQs, and embed Calendly\n\nMajor updates to resource library organization and interactive tools:\n\nResource Library Enhancements:\n- Reorganized sections into logical flow: Marketing, Implementation, Training, Research, Financial, Committee Presentations, Technical, Connect & Learn More\n- Embedded Calendly widget directly in Support section for easy scheduling\n- Made Request Sample, Request Trial, and Schedule Call resources available and functional\n- Fixed FAQ PDF filename to match actual file\n- Added Committee Presentations section \\(coming soon\\) for hospital presentations\n\nROI Calculator Integration:\n- Created comprehensive interactive ROI calculator at /roi-calculator.html\n- Styled to match website brand colors \\(#214140, #8BBAB8, #DFEAF0\\)\n- Integrated all 21 references from Cost Benefit Analysis PDF\n- Added expandable references section with full citations\n- Moved \"click arrow to edit values\" hints to align with dropdown arrows\n- Made fully mobile responsive with media queries\n\nFAQ Page Expansion:\n- Expanded from 10 to 25 comprehensive FAQs covering all aspects\n- Added categories: Installation, Training, Compatibility, Safety, Results, Pricing, Warranty, Ordering, Support\n- Updated contact information to use \\(410\\) 835-4089\n- Connected FAQ page call-to-action buttons to proper destinations\n\nResources Organization:\n- Matched all 12 available PDFs from /frontend/public/resources/\n- Implemented grayed-out state for unavailable resources with \"Coming Soon\" labels\n- All resources properly linked and functional\n\nCo-Authored-By: Claude Sonnet 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git push:*)"
+    ]
+  }
+}

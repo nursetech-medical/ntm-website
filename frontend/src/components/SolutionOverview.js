@@ -16,9 +16,9 @@ const SolutionOverview = () => {
       title: "Immediate Implementation",
       icon: "clock",
       points: [
-        "30-second installation",
+        "<30-second installation",
         "Intuitive design - works like a hair clip",
-        "15-minute staff training"
+        "5-minute staff training"
       ]
     },
     {

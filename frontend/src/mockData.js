@@ -3,7 +3,7 @@ export const mockData = {
   // Product Information
   product: {
     name: "Cordflex",
-    tagline: "Transform ICU Line Management in 30 seconds",
+    tagline: "Transform ICU Line Management in <30 seconds",
     description: "The Cordflex Clip reduces nurse time by 37% and makes 78% of nurses feel safer during patient ambulation",
     youtubeVideoId: "uxTUu8HbrEg",
     features: [
@@ -35,9 +35,9 @@ export const mockData = {
       title: "Immediate Implementation",
       icon: "clock",
       points: [
-        "30-second installation",
+        "<30-second installation",
         "Intuitive design - works like a hair clip",
-        "15-minute staff training"
+        "5-minute staff training"
       ]
     },
     {
@@ -92,11 +92,11 @@ export const mockData = {
   faq: [
     {
       question: "How long does it take to install the Cordflex Clip?",
-      answer: "Installation takes just 30 seconds. The intuitive design works like a hair clip, making it easy for staff to use immediately."
+      answer: "Installation takes less than 30 seconds. The intuitive design works like a hair clip, making it easy for staff to use immediately."
     },
     {
       question: "Is training required for staff?",
-      answer: "Minimal training is required - just 15 minutes of staff training is sufficient for full implementation."
+      answer: "Minimal training is required - just 5 minutes of staff training is sufficient for full implementation."
     },
     {
       question: "What types of medical lines does it support?",

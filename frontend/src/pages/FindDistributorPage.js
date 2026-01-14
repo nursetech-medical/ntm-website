@@ -30,6 +30,23 @@ const FindDistributorPage = () => {
   const [selectedRegion, setSelectedRegion] = useState('all');
   const [selectedType, setSelectedType] = useState('all');
 
+  // State name to abbreviation mapping
+  const stateNameMap = {
+    'alabama': 'AL', 'alaska': 'AK', 'arizona': 'AZ', 'arkansas': 'AR', 'california': 'CA',
+    'colorado': 'CO', 'connecticut': 'CT', 'delaware': 'DE', 'florida': 'FL', 'georgia': 'GA',
+    'hawaii': 'HI', 'idaho': 'ID', 'illinois': 'IL', 'indiana': 'IN', 'iowa': 'IA',
+    'kansas': 'KS', 'kentucky': 'KY', 'louisiana': 'LA', 'maine': 'ME', 'maryland': 'MD',
+    'massachusetts': 'MA', 'michigan': 'MI', 'minnesota': 'MN', 'mississippi': 'MS', 'missouri': 'MO',
+    'montana': 'MT', 'nebraska': 'NE', 'nevada': 'NV', 'new hampshire': 'NH', 'new jersey': 'NJ',
+    'new mexico': 'NM', 'new york': 'NY', 'north carolina': 'NC', 'north dakota': 'ND', 'ohio': 'OH',
+    'oklahoma': 'OK', 'oregon': 'OR', 'pennsylvania': 'PA', 'rhode island': 'RI', 'south carolina': 'SC',
+    'south dakota': 'SD', 'tennessee': 'TN', 'texas': 'TX', 'utah': 'UT', 'vermont': 'VT',
+    'virginia': 'VA', 'washington': 'WA', 'west virginia': 'WV', 'wisconsin': 'WI', 'wyoming': 'WY',
+    'ontario': 'ON', 'quebec': 'QC', 'british columbia': 'BC', 'alberta': 'AB', 'manitoba': 'MB',
+    'saskatchewan': 'SK', 'nova scotia': 'NS', 'new brunswick': 'NB', 'prince edward island': 'PE',
+    'newfoundland': 'NL', 'newfoundland and labrador': 'NL'
+  };
+
   const regions = [
     { value: 'all', label: 'All Regions' },
     { value: 'northeast', label: 'Northeast' },
@@ -183,10 +200,19 @@ const FindDistributorPage = () => {
   const filteredDistributors = distributors.filter(distributor => {
     const matchesRegion = selectedRegion === 'all' || distributor.region === selectedRegion;
     const matchesType = selectedType === 'all' || distributor.type === selectedType;
-    const matchesSearch = searchState === '' || 
-      distributor.name.toLowerCase().includes(searchState.toLowerCase()) ||
-      distributor.states.some(state => state.toLowerCase().includes(searchState.toLowerCase()));
-    
+
+    // Convert state name to abbreviation if needed
+    const searchLower = searchState.toLowerCase().trim();
+    const stateAbbr = stateNameMap[searchLower] || searchState.toUpperCase();
+
+    const matchesSearch = searchState === '' ||
+      distributor.name.toLowerCase().includes(searchLower) ||
+      distributor.states.some(state =>
+        state.toLowerCase() === searchLower ||
+        state.toLowerCase().includes(searchLower) ||
+        state === stateAbbr
+      );
+
     return matchesRegion && matchesType && matchesSearch;
   });
 
@@ -576,7 +602,7 @@ const FindDistributorPage = () => {
                     className="px-8 py-4 text-lg font-semibold"
                   >
                     <Phone className="h-5 w-5 mr-2" />
-                    Call: 1-800-CORDFLEX
+                    Call: (410) 835-4089
                   </Button>
                 </div>
               </div>

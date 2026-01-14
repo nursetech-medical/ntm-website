@@ -44,7 +44,7 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-4xl mx-auto">
           {/* Content */}
           <div className="space-y-8">
             {/* Trust Badges */}
@@ -67,7 +67,7 @@ const HeroSection = () => {
             <AnimatedSection animation="fade-up" delay={200}>
               <div className="space-y-4">
                 <h1 className="text-4xl lg:text-6xl font-bold leading-tight" style={{ color: '#214140' }}>
-                  Transform ICU Line Management in 30 seconds
+                  Transform ICU Line Management in &lt;30 seconds
                 </h1>
                 <p className="text-xl text-gray-600 leading-relaxed">
                   The Cordflex Clip reduces nurse time by 37% and makes 78% of nurses feel safer during patient ambulation
@@ -133,41 +133,6 @@ const HeroSection = () => {
             </AnimatedSection>
           </div>
 
-          {/* Product Visual */}
-          <AnimatedSection animation="fade-left" delay={300}>
-            <div className="relative">
-              <div className="relative bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-2xl">
-                <img 
-                  src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAwIiBoZWlnaHQ9IjQwMCIgdmlld0JveD0iMCAwIDUwMCA0MDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI1MDAiIGhlaWdodD0iNDAwIiBmaWxsPSIjRkZGRkZGIi8+CjxyZWN0IHg9IjEwMCIgeT0iMTAwIiB3aWR0aD0iMzAwIiBoZWlnaHQ9IjIwMCIgZmlsbD0iIzIxNDE0MCIgcng9IjEwIi8+Cjx0ZXh0IHg9IjI1MCIgeT0iMjEwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjRkZGRkZGIiBmb250LXNpemU9IjE4IiBmb250LWZhbWlseT0iQXJpYWwsIHNhbnMtc2VyaWYiPkNvcmRmbGV4IERldmljZTwvdGV4dD4KPC9zdmc+"
-                  alt="Cordflex Device"
-                  className="w-full h-auto rounded-lg"
-                />
-                
-                {/* Floating Stats */}
-                <AnimatedSection animation="fade-down" delay={800}>
-                  <div className="absolute -top-4 -right-4 bg-white rounded-lg shadow-lg p-4 border border-gray-200">
-                    <div className="text-sm text-gray-600 font-medium">Usage Rate</div>
-                    <div className="text-2xl font-bold" style={{ color: '#1F8051' }}>
-                      <AnimatedCounter value="90%" duration={1500} />
-                    </div>
-                  </div>
-                </AnimatedSection>
-                
-                <AnimatedSection animation="fade-up" delay={900}>
-                  <div className="absolute -bottom-4 -left-4 bg-white rounded-lg shadow-lg p-4 border border-gray-200">
-                    <div className="text-sm text-gray-600 font-medium">Time Saved</div>
-                    <div className="text-2xl font-bold" style={{ color: '#1F8051' }}>
-                      <AnimatedCounter value="37%" duration={1500} />
-                    </div>
-                  </div>
-                </AnimatedSection>
-              </div>
-
-              {/* Animated Elements */}
-              <div className="absolute top-4 right-4 w-4 h-4 bg-green-400 rounded-full animate-pulse"></div>
-              <div className="absolute bottom-4 left-4 w-3 h-3 bg-teal-400 rounded-full animate-bounce"></div>
-            </div>
-          </AnimatedSection>
         </div>
       </div>
     </section>

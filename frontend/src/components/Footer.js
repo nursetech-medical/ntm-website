@@ -3,6 +3,7 @@ import { Button } from './ui/button';
 import { Input } from './ui/input';
 import { Linkedin, Twitter, Youtube, Facebook, Instagram, Phone, Mail, MapPin } from 'lucide-react';
 import { newsletterApi, contactApi, handleApiError } from '../services/api';
+import emailService from '../services/emailService';
 import { useToast } from '../hooks/use-toast';
 import AnimatedSection from './AnimatedSection';
 
@@ -19,20 +20,29 @@ const Footer = () => {
 
     setIsLoadingNewsletter(true);
     try {
-      const response = await newsletterApi.subscribe(email);
-      
-      toast({
-        title: "Newsletter Subscription",
-        description: response.data.message,
-        duration: 5000,
-      });
-      
+      // Try backend API first, fallback to email service
+      try {
+        const response = await newsletterApi.subscribe(email);
+        toast({
+          title: "Newsletter Subscription",
+          description: response.data.message,
+          duration: 5000,
+        });
+      } catch (apiError) {
+        // Fallback to email service
+        const result = await emailService.subscribeNewsletter(email);
+        toast({
+          title: "Newsletter Subscription",
+          description: result.message,
+          duration: 5000,
+        });
+      }
+
       setEmail('');
     } catch (error) {
-      const apiError = handleApiError(error);
       toast({
         title: "Error",
-        description: apiError.message,
+        description: error.message || 'Failed to subscribe. Please try again.',
         variant: "destructive",
         duration: 5000,
       });
@@ -41,72 +51,12 @@ const Footer = () => {
     }
   };
 
-  const handleSampleRequest = async () => {
-    setIsLoadingSample(true);
-    try {
-      const response = await contactApi.sampleRequest({
-        name: 'Sample Request',
-        email: 'sample@example.com',
-        phone: '',
-        hospital: 'Sample Hospital',
-        department: 'ICU',
-        beds: 30,
-        source: 'Footer',
-        comments: 'Interested in trying Cordflex from footer'
-      });
-      
-      toast({
-        title: "Sample Request Submitted",
-        description: response.data.message,
-        duration: 5000,
-      });
-    } catch (error) {
-      const apiError = handleApiError(error);
-      toast({
-        title: "Error",
-        description: apiError.message,
-        variant: "destructive",
-        duration: 5000,
-      });
-    } finally {
-      setIsLoadingSample(false);
-    }
+  const handleSampleRequest = () => {
+    window.location.href = '/sample-request';
   };
 
-  const handleTrialStart = async () => {
-    setIsLoadingTrial(true);
-    try {
-      const response = await contactApi.trialRequest({
-        name: 'Trial Request',
-        title: 'Healthcare Professional',
-        email: 'trial@example.com',
-        phone: '',
-        hospital: 'Sample Hospital',
-        department: 'ICU',
-        beds: 30,
-        current_solution: 'Manual management',
-        challenges: ['Line tangles', 'Patient safety'],
-        start_date: new Date().toISOString(),
-        timeline: '3 months',
-        stakeholders: 'Nursing staff'
-      });
-      
-      toast({
-        title: "Trial Request Submitted",
-        description: response.data.message,
-        duration: 5000,
-      });
-    } catch (error) {
-      const apiError = handleApiError(error);
-      toast({
-        title: "Error",
-        description: apiError.message,
-        variant: "destructive",
-        duration: 5000,
-      });
-    } finally {
-      setIsLoadingTrial(false);
-    }
+  const handleTrialStart = () => {
+    window.location.href = '/trial-request';
   };
 
   return (
@@ -117,14 +67,19 @@ const Footer = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
             {/* Company Info */}
             <div className="lg:col-span-2">
+              <img
+                src="/images/logos/ntlogo.png"
+                alt="Nursetech Medical Logo"
+                className="h-16 w-auto mb-6"
+              />
               <h3 className="font-bold text-lg mb-4" style={{ color: '#214140' }}>
                 Nursetech Medical Corp
               </h3>
               <div className="space-y-3 text-gray-600">
                 <div className="flex items-center space-x-3">
                   <Phone className="h-5 w-5" style={{ color: '#8BBAB8' }} />
-                  <a href="tel:+18002673539" className="hover:text-teal-600 transition-colors duration-200">
-                    1-800-CORDFLEX (1-800-267-3539)
+                  <a href="tel:+14108354089" className="hover:text-teal-600 transition-colors duration-200">
+                    (410) 835-4089
                   </a>
                 </div>
                 <div className="flex items-center space-x-3">
@@ -136,9 +91,9 @@ const Footer = () => {
                 <div className="flex items-start space-x-3">
                   <MapPin className="h-5 w-5 mt-1" style={{ color: '#8BBAB8' }} />
                   <div>
-                    <p>Nursetech Medical LLC</p>
-                    <p>123 Medical Plaza, Suite 400</p>
-                    <p>Boston, MA 02101</p>
+                    <p>Nursetech Medical Corp</p>
+                    <p>8 The Green, Ste A</p>
+                    <p>Dover, DE 19001</p>
                   </div>
                 </div>
               </div>
@@ -199,19 +154,17 @@ const Footer = () => {
                 <div className="flex flex-col sm:flex-row space-y-2 sm:space-y-0 sm:space-x-4">
                   <Button
                     onClick={handleSampleRequest}
-                    disabled={isLoadingSample}
                     className="hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundColor: '#8BBAB8', color: 'white' }}
                   >
-                    {isLoadingSample ? 'Processing...' : 'Request a Sample'}
+                    Request a Sample
                   </Button>
                   <Button
                     onClick={handleTrialStart}
-                    disabled={isLoadingTrial}
                     className="hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundColor: '#214140', color: 'white' }}
                   >
-                    {isLoadingTrial ? 'Processing...' : 'Request a Trial'}
+                    Request a Trial
                   </Button>
                 </div>
                 <div className="mt-4 space-y-2">
@@ -258,7 +211,7 @@ const Footer = () => {
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <div className="text-center md:text-left">
               <p className="text-gray-300 text-sm">
-                © 2024 Nursetech Medical Corp. All rights reserved.
+                © {new Date().getFullYear()} Nursetech Medical. All rights reserved.
               </p>
               <div className="flex justify-center md:justify-start space-x-4 mt-2">
                 <a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors duration-200 text-sm">Privacy Policy</a>

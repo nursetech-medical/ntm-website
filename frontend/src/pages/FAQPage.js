@@ -22,19 +22,19 @@ const FAQPage = () => {
     {
       id: 1,
       question: "How long does it take to install the Cordflex Clip?",
-      answer: "Installation takes just 30 seconds. The intuitive design works like a hair clip, making it easy for staff to use immediately.",
+      answer: "Installation takes less than 30 seconds. The intuitive design works like a hair clip, making it easy for staff to use immediately.",
       category: "Installation"
     },
     {
       id: 2,
       question: "Is training required for staff?",
-      answer: "Minimal training is required - just 15 minutes of staff training is sufficient for full implementation.",
+      answer: "Minimal training is required - just 5 minutes of staff training is sufficient for full implementation.",
       category: "Training"
     },
     {
       id: 3,
       question: "What types of medical lines does it support?",
-      answer: "Cordflex accommodates all line types and attaches to any surface with 2-degree freedom of movement.",
+      answer: "Cordflex accommodates all line types and attaches to any surface with 2-degree freedom of movement, including IV lines, central lines, arterial lines, and specialty lines.",
       category: "Compatibility"
     },
     {
@@ -46,13 +46,13 @@ const FAQPage = () => {
     {
       id: 5,
       question: "What kind of results can we expect?",
-      answer: "Clinical studies show 37% faster line identification, 40% reduction in line pullouts, and 25% increase in patient ambulation.",
+      answer: "Clinical studies show 37% faster line identification, 40% reduction in line pullouts, 25% increase in patient ambulation, 61% reduction in line disconnections, and 84% decrease in nurse callback incidents.",
       category: "Results"
     },
     {
       id: 6,
       question: "How much does Cordflex cost?",
-      answer: "Pricing varies based on quantity and package type. Contact us for detailed pricing information and bulk discounts.",
+      answer: "Pricing varies based on quantity and package type. Contact us for detailed pricing information and bulk discounts. Most facilities see ROI within the first year of implementation.",
       category: "Pricing"
     },
     {
@@ -63,21 +63,111 @@ const FAQPage = () => {
     },
     {
       id: 8,
-      question: "Can Cordflex be used in other hospital units?",
-      answer: "While designed for ICU use, Cordflex can be effective in any unit where line management is crucial, such as emergency departments and step-down units.",
+      question: "Can Cordflex be used in other hospital units besides the ICU?",
+      answer: "Yes! While designed for ICU use, Cordflex can be effective in any unit where line management is crucial, including emergency departments, step-down units, NICU, PICU, and during patient transfers.",
       category: "Compatibility"
     },
     {
       id: 9,
       question: "How do I request a sample or trial?",
-      answer: "You can request a sample through our website form or contact our sales team directly. Trial programs are available for qualified institutions.",
+      answer: "You can request a sample through our website form or contact our sales team directly at (410) 835-4089. Trial programs are available for qualified institutions.",
       category: "Ordering"
     },
     {
       id: 10,
       question: "What support is available during implementation?",
-      answer: "We provide comprehensive implementation support including staff training, workflow optimization, and ongoing technical assistance.",
+      answer: "We provide comprehensive implementation support including staff training, workflow optimization, ongoing technical assistance, and access to our clinical team.",
       category: "Support"
+    },
+    {
+      id: 11,
+      question: "Is Cordflex reusable or single-use?",
+      answer: "Cordflex is designed as a single-use device to ensure sterility and optimal performance for each patient.",
+      category: "Safety"
+    },
+    {
+      id: 12,
+      question: "What materials is Cordflex made from?",
+      answer: "Cordflex is manufactured from medical-grade materials that are safe for patient contact and compatible with standard hospital cleaning protocols. Full technical specifications are available in our technical documentation.",
+      category: "Safety"
+    },
+    {
+      id: 13,
+      question: "Can Cordflex help reduce falls in the ICU?",
+      answer: "Yes, by preventing line entanglement and reducing trip hazards, Cordflex has been shown to contribute to fall prevention efforts in the ICU.",
+      category: "Results"
+    },
+    {
+      id: 14,
+      question: "How does Cordflex improve nurse workflow?",
+      answer: "Cordflex reduces time spent managing tangled lines, decreases callbacks for line issues, and allows nurses to focus more on direct patient care. Studies show significant improvements in nurse satisfaction scores.",
+      category: "Results"
+    },
+    {
+      id: 15,
+      question: "Is there clinical evidence supporting Cordflex?",
+      answer: "Yes, Cordflex is supported by clinical evidence including peer-reviewed studies, hospital case studies, and real-world data from multiple healthcare facilities. Visit our Clinical Evidence page for detailed information.",
+      category: "Results"
+    },
+    {
+      id: 16,
+      question: "What is the shelf life of Cordflex?",
+      answer: "Cordflex has an extended shelf life when stored properly. Specific expiration information is printed on each package. Contact us for detailed storage requirements.",
+      category: "Safety"
+    },
+    {
+      id: 17,
+      question: "Can I purchase Cordflex through a GPO or distributor?",
+      answer: "Yes, Cordflex is available through various purchasing channels including GPOs and authorized distributors. We also have a partnership with Med One for equipment solutions.",
+      category: "Ordering"
+    },
+    {
+      id: 18,
+      question: "What is the return policy?",
+      answer: "Please see our Refund Policy page for detailed information about returns, or contact our customer service team for specific questions about your order.",
+      category: "Warranty"
+    },
+    {
+      id: 19,
+      question: "How do I report a product issue or adverse event?",
+      answer: "Product issues or adverse events should be reported immediately to our support team at (410) 835-4089 or info@nursetechmedical.com. We take all product safety concerns seriously.",
+      category: "Support"
+    },
+    {
+      id: 20,
+      question: "Can Cordflex be used during patient transport or imaging?",
+      answer: "Yes, Cordflex is specifically designed to help manage lines during patient transfers, including transport to imaging, ambulation, and bed repositioning.",
+      category: "Compatibility"
+    },
+    {
+      id: 21,
+      question: "Does Cordflex work with specialty lines like dialysis catheters?",
+      answer: "Yes, Cordflex accommodates specialty lines including dialysis catheters, Swan-Ganz catheters, and other complex line systems.",
+      category: "Compatibility"
+    },
+    {
+      id: 22,
+      question: "What training materials are available?",
+      answer: "We provide comprehensive training materials including instructional videos, step-by-step guides, and in-service training programs. All materials are available in our Resource Library.",
+      category: "Training"
+    },
+    {
+      id: 23,
+      question: "How quickly can we get started with Cordflex?",
+      answer: "Implementation is quick - most facilities can begin using Cordflex within days of receiving their order. The intuitive design and minimal training requirements allow for rapid adoption.",
+      category: "Installation"
+    },
+    {
+      id: 24,
+      question: "Is Cordflex latex-free?",
+      answer: "Yes, Cordflex is latex-free to accommodate patients and staff with latex sensitivities.",
+      category: "Safety"
+    },
+    {
+      id: 25,
+      question: "Can I see presentations or case studies from other hospitals?",
+      answer: "Yes, we have case studies, hospital testimonials, and presentation materials available in our Resource Library. These include results from facilities that have successfully implemented Cordflex.",
+      category: "Results"
     }
   ];
 
@@ -275,14 +365,16 @@ const FAQPage = () => {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center">
                   <button
-                    className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200"
+                    className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200 rounded-lg"
                     style={{ backgroundColor: '#8BBAB8', color: 'white' }}
+                    onClick={() => window.location.href = '/contact'}
                   >
                     Contact Support
                   </button>
                   <button
-                    className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200"
-                    style={{ backgroundColor: '#1F8051', color: 'white' }}
+                    className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200 rounded-lg"
+                    style={{ backgroundColor: '#214140', color: 'white' }}
+                    onClick={() => window.open('https://calendly.com/davidusevitch/meet-with-david-nursetech-medical', '_blank')}
                   >
                     Schedule a Call
                   </button>

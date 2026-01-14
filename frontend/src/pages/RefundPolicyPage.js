@@ -81,7 +81,7 @@ const RefundPolicyPage = () => {
       title: "Contact Customer Service",
       description: "Reach out to our customer service team to initiate the return process",
       icon: <Phone className="h-5 w-5" />,
-      details: "Call 1-800-CORDFLEX or email returns@nursetechmedical.com"
+      details: "Call (410) 835-4089 or email returns@nursetechmedical.com"
     },
     {
       step: 2,
@@ -470,7 +470,7 @@ const RefundPolicyPage = () => {
                         </div>
                         <div>
                           <div className="font-semibold">Phone</div>
-                          <div className="text-gray-600">1-800-CORDFLEX</div>
+                          <div className="text-gray-600">(410) 835-4089</div>
                         </div>
                       </div>
                     </div>

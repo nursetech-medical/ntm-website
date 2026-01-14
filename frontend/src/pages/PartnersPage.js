@@ -505,7 +505,7 @@ const PartnersPage = () => {
                     className="px-8 py-4 text-lg font-semibold"
                   >
                     <Phone className="h-5 w-5 mr-2" />
-                    Call: 1-800-CORDFLEX
+                    Call: (410) 835-4089
                   </Button>
                 </div>
               </div>

@@ -415,7 +415,7 @@ const TermsOfServicePage = () => {
                         </div>
                         <div>
                           <div className="font-semibold">Phone</div>
-                          <div className="text-gray-600">1-800-CORDFLEX</div>
+                          <div className="text-gray-600">(410) 835-4089</div>
                         </div>
                       </div>
                     </div>

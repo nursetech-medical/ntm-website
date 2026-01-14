@@ -50,7 +50,7 @@ const FloatingActionWidget = () => {
   if (!isVisible) return null;
 
   return (
-    <div className="fixed right-6 top-1/2 transform -translate-y-1/2 z-50 hidden lg:block">
+    <div className="fixed right-6 bottom-6 z-50 hidden lg:block">
       <Card className="bg-white shadow-xl border-2 border-gray-200 overflow-hidden">
         <CardContent className="p-0">
           {/* Header */}

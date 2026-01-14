@@ -10,6 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '.
 import { Label } from '../components/ui/label';
 import { Checkbox } from '../components/ui/checkbox';
 import { contactApi, handleApiError } from '../services/api';
+import emailService from '../services/emailService';
 import { useToast } from '../hooks/use-toast';
 
 const SampleRequestPage = () => {
@@ -81,9 +82,9 @@ const SampleRequestPage = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    
+
     try {
-      const response = await contactApi.sampleRequest({
+      const requestData = {
         name: `${formData.firstName} ${formData.lastName}`,
         email: formData.email,
         phone: formData.phone,
@@ -92,14 +93,27 @@ const SampleRequestPage = () => {
         beds: 0,
         source: 'Sample Request Form',
         comments: `Role: ${formData.role}, Unit: ${formData.unit}, Priorities: ${JSON.stringify(formData.priorities)}, Comments: ${formData.otherComments}`
-      });
-      
-      toast({
-        title: "Sample Request Submitted Successfully",
-        description: response.data.message,
-        duration: 5000,
-      });
-      
+      };
+
+      // Try backend API first, fallback to email service
+      let response;
+      try {
+        response = await contactApi.sampleRequest(requestData);
+        toast({
+          title: "Sample Request Submitted Successfully",
+          description: response.data.message,
+          duration: 5000,
+        });
+      } catch (apiError) {
+        // Fallback to email service
+        response = await emailService.sendSampleRequest(requestData);
+        toast({
+          title: "Sample Request Submitted Successfully",
+          description: response.message,
+          duration: 5000,
+        });
+      }
+
       // Reset form
       setFormData({
         firstName: '',
@@ -113,10 +127,9 @@ const SampleRequestPage = () => {
         otherComments: ''
       });
     } catch (error) {
-      const apiError = handleApiError(error);
       toast({
         title: "Error",
-        description: apiError.message,
+        description: error.message || 'Failed to submit sample request. Please try again.',
         variant: "destructive",
         duration: 5000,
       });

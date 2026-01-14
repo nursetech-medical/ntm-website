@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import AnimatedSection from '../components/AnimatedSection';
@@ -9,89 +9,66 @@ import { Button } from '../components/ui/button';
 import { Download, FileText, Video, Calendar, ExternalLink, Calculator } from 'lucide-react';
 
 const ResourceLibraryPage = () => {
+  // Load Calendly widget script
+  useEffect(() => {
+    const script = document.createElement('script');
+    script.src = 'https://assets.calendly.com/assets/external/widget.js';
+    script.async = true;
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+    };
+  }, []);
   const resourceSections = [
     {
-      title: "Implementation & In-Service Tools",
+      title: "Marketing & General Information",
+      icon: <FileText className="h-6 w-6" />,
+      resources: [
+        {
+          title: "Cordflex™ Clip Flyer",
+          description: "Single-page overview highlighting key features and benefits",
+          type: "Marketing Material",
+          downloadable: true,
+          available: true,
+          filePath: "/resources/Cordflex™ Clip Flyer.pdf"
+        },
+        {
+          title: "Trifold Brochure",
+          description: "Comprehensive trifold brochure for stakeholder presentations",
+          type: "Marketing Material",
+          downloadable: true,
+          available: true,
+          filePath: "/resources/Trifold-Cordflex.pdf"
+        },
+        {
+          title: "Med One Partnership Overview",
+          description: "Information about our partnership with Med One for equipment solutions",
+          type: "Partnership Info",
+          downloadable: true,
+          available: true,
+          filePath: "/resources/Cordflex-Med One.pdf"
+        }
+      ]
+    },
+    {
+      title: "Implementation & Service Tools",
       icon: <FileText className="h-6 w-6" />,
       resources: [
         {
           title: "Instructions for Use",
           description: "Comprehensive guide for proper Cordflex installation and usage",
           type: "PDF Guide",
-          downloadable: true
+          downloadable: true,
+          available: true,
+          filePath: "/resources/Instructions For Use.pdf"
         },
         {
           title: "Post Trial Survey & Feedback Form",
           description: "Collect feedback from your team after Cordflex implementation",
           type: "Form Template",
-          downloadable: true
-        },
-        {
-          title: "Cost Benefit Analysis",
-          description: "Template for analyzing the financial impact of Cordflex in your ICU",
-          type: "Excel Template",
-          downloadable: true
-        },
-        {
-          title: "ROI Calculator",
-          description: "Interactive tool to calculate return on investment for Cordflex",
-          type: "Online Tool",
-          downloadable: false,
-          interactive: true
-        },
-        {
-          title: "Cordflex Floor Trial Flyer",
-          description: "Informational flyer for staff during trial periods",
-          type: "Marketing Material",
-          downloadable: true
-        }
-      ]
-    },
-    {
-      title: "Research & Evidence-Based Practice Support",
-      icon: <FileText className="h-6 w-6" />,
-      resources: [
-        {
-          title: "Whitepaper - Cordflex and the Nursing Crisis",
-          description: "In-depth analysis of how Cordflex addresses current nursing challenges",
-          type: "Research Paper",
-          downloadable: true
-        },
-        {
-          title: "FAQ Sheet",
-          description: "Common questions and answers about Cordflex implementation",
-          type: "Reference Guide",
-          downloadable: true
-        },
-        {
-          title: "Cordflex Flyer",
-          description: "Overview brochure highlighting key benefits and features",
-          type: "Marketing Material",
-          downloadable: true
-        }
-      ]
-    },
-    {
-      title: "Technical Reports",
-      icon: <FileText className="h-6 w-6" />,
-      resources: [
-        {
-          title: "Technical Details",
-          description: "Detailed specifications and engineering documentation",
-          type: "Technical Document",
-          downloadable: true
-        },
-        {
-          title: "MSDS Data Sheet",
-          description: "Material Safety Data Sheet for Cordflex components",
-          type: "Safety Document",
-          downloadable: true
-        },
-        {
-          title: "Reporting Cordflex Issues",
-          description: "Guidelines for reporting technical issues or adverse events",
-          type: "Procedure Guide",
-          downloadable: true
+          downloadable: true,
+          available: false
         }
       ]
     },
@@ -158,6 +135,132 @@ const ResourceLibraryPage = () => {
       ]
     },
     {
+      title: "Research & Evidence-Based Practice Support",
+      icon: <FileText className="h-6 w-6" />,
+      resources: [
+        {
+          title: "Cordflex Background Research Whitepaper",
+          description: "In-depth analysis of clinical evidence and research supporting Cordflex",
+          type: "Research Paper",
+          downloadable: true,
+          available: true,
+          filePath: "/resources/Cordflex Background Research Whitepaper (2).pdf"
+        },
+        {
+          title: "Cost of Cord Disorganization",
+          description: "Research document analyzing the financial and clinical impact of poor line management",
+          type: "Research Paper",
+          downloadable: true,
+          available: true,
+          filePath: "/resources/1.7M Cost of Cord Disorganization.pdf"
+        },
+        {
+          title: "Line Management for Reducing Trips and Falls",
+          description: "Evidence-based strategies for preventing patient falls through better line management",
+          type: "Clinical Guide",
+          downloadable: true,
+          available: true,
+          filePath: "/resources/Line Management for Reducing Trips and Falls.pdf"
+        },
+        {
+          title: "Versatility of Cordflex",
+          description: "Documentation showcasing diverse applications across different care settings",
+          type: "Use Case Guide",
+          downloadable: true,
+          available: true,
+          filePath: "/resources/Versatility of Cordflex.pdf"
+        },
+        {
+          title: "FAQ Document",
+          description: "Common questions and answers about Cordflex implementation (File too large for web hosting - contact us for access)",
+          type: "Reference Guide",
+          downloadable: true,
+          available: false
+        },
+        {
+          title: "Top 10 Health Tech Hazards 2025",
+          description: "ECRI report on health technology hazards and how Cordflex addresses key concerns",
+          type: "Industry Report",
+          downloadable: true,
+          available: true,
+          filePath: "/resources/Top10HealthTechHazards_2025_ExecutiveBrief.pdf"
+        }
+      ]
+    },
+    {
+      title: "Financial Analysis & ROI Tools",
+      icon: <Calculator className="h-6 w-6" />,
+      resources: [
+        {
+          title: "ROI Calculator",
+          description: "Interactive tool to calculate return on investment for Cordflex",
+          type: "Online Tool",
+          downloadable: false,
+          interactive: true,
+          available: true,
+          link: "/roi-calculator.html"
+        },
+        {
+          title: "Cost Benefit Analysis of Using Cordflex",
+          description: "Detailed financial impact analysis with references and ROI data",
+          type: "PDF Analysis",
+          downloadable: true,
+          available: true,
+          filePath: "/resources/Cost Benefit Analysis of Using Cordflex.pdf"
+        }
+      ]
+    },
+    {
+      title: "Committee Presentations",
+      icon: <FileText className="h-6 w-6" />,
+      resources: [
+        {
+          title: "Introducing Cordflex Presentation",
+          description: "PowerPoint presentation for introducing Cordflex to committees and stakeholders",
+          type: "PowerPoint",
+          downloadable: true,
+          available: false,
+          externalLink: true
+        },
+        {
+          title: "Value Analysis Committee Results",
+          description: "Presentation template for sharing Cordflex trial results with value analysis committees",
+          type: "PowerPoint",
+          downloadable: true,
+          available: false,
+          externalLink: true
+        }
+      ]
+    },
+    {
+      title: "Technical Reports",
+      icon: <FileText className="h-6 w-6" />,
+      resources: [
+        {
+          title: "Cordflex Technical Information",
+          description: "Detailed specifications and engineering documentation",
+          type: "Technical Document",
+          downloadable: true,
+          available: true,
+          filePath: "/resources/Cordflex-Technical Info.pdf"
+        },
+        {
+          title: "MSDS Data Sheet",
+          description: "Material Safety Data Sheet for Cordflex components",
+          type: "Safety Document",
+          downloadable: true,
+          available: false
+        },
+        {
+          title: "Reporting Cordflex Issues",
+          description: "Guidelines for reporting technical issues or adverse events",
+          type: "Procedure Guide",
+          downloadable: true,
+          available: false
+        }
+      ]
+    },
+    {
       title: "Connect & Learn More",
       icon: <Calendar className="h-6 w-6" />,
       resources: [
@@ -166,7 +269,8 @@ const ResourceLibraryPage = () => {
           description: "Book a consultation with our clinical team",
           type: "Consultation",
           downloadable: false,
-          link: "https://calendly.com/davidusevitch/cordflex-consultation",
+          available: true,
+          link: "https://calendly.com/davidusevitch/meet-with-david-nursetech-medical",
           external: true
         },
         {
@@ -174,6 +278,7 @@ const ResourceLibraryPage = () => {
           description: "Get a free sample kit for your ICU",
           type: "Sample Request",
           downloadable: false,
+          available: true,
           link: "/sample-request"
         },
         {
@@ -181,6 +286,7 @@ const ResourceLibraryPage = () => {
           description: "Request a comprehensive trial in your facility",
           type: "Trial Request",
           downloadable: false,
+          available: true,
           link: "/trial-request"
         }
       ]
@@ -188,12 +294,17 @@ const ResourceLibraryPage = () => {
   ];
 
   const handleResourceClick = (resource) => {
-    if (resource.downloadable) {
-      // Handle download
-      console.log('Download:', resource.title);
-    } else if (resource.interactive) {
-      // Handle interactive tools
-      console.log('Interactive tool:', resource.title);
+    // Don't allow clicking unavailable resources
+    if (!resource.available) {
+      return;
+    }
+
+    if (resource.downloadable && resource.filePath) {
+      // Open PDF in new tab for download/viewing
+      window.open(resource.filePath, '_blank');
+    } else if (resource.interactive && resource.link) {
+      // Open interactive tool in new tab
+      window.open(resource.link, '_blank');
     } else if (resource.external) {
       window.open(resource.link, '_blank');
     } else if (resource.link) {
@@ -255,44 +366,61 @@ const ResourceLibraryPage = () => {
                   
                   <StaggeredList delay={150} className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {section.resources.map((resource, resourceIndex) => (
-                      <Card 
-                        key={resourceIndex} 
-                        className="bg-white shadow-lg hover:shadow-xl transition-all duration-300 cursor-pointer transform hover:-translate-y-1"
+                      <Card
+                        key={resourceIndex}
+                        className={`bg-white shadow-lg transition-all duration-300 ${
+                          resource.available
+                            ? 'hover:shadow-xl cursor-pointer transform hover:-translate-y-1'
+                            : 'opacity-50 cursor-not-allowed'
+                        }`}
                         onClick={() => handleResourceClick(resource)}
                       >
                         <CardHeader className="pb-3">
                           <div className="flex items-center justify-between mb-2">
-                            <Badge 
-                              variant="secondary" 
-                              style={{ backgroundColor: '#DFEAF0', color: '#214140' }}
+                            <Badge
+                              variant="secondary"
+                              style={{
+                                backgroundColor: resource.available ? '#DFEAF0' : '#e5e7eb',
+                                color: resource.available ? '#214140' : '#9ca3af'
+                              }}
                             >
                               {resource.type}
                             </Badge>
                             <div className="flex items-center space-x-2">
                               {getResourceIcon(resource.type)}
-                              {resource.downloadable && <Download className="h-4 w-4 text-gray-500" />}
-                              {resource.external && <ExternalLink className="h-4 w-4 text-gray-500" />}
+                              {resource.downloadable && <Download className={`h-4 w-4 ${resource.available ? 'text-gray-500' : 'text-gray-400'}`} />}
+                              {resource.external && <ExternalLink className={`h-4 w-4 ${resource.available ? 'text-gray-500' : 'text-gray-400'}`} />}
                             </div>
                           </div>
-                          <CardTitle className="text-lg leading-tight" style={{ color: '#214140' }}>
+                          <CardTitle className="text-lg leading-tight" style={{ color: resource.available ? '#214140' : '#9ca3af' }}>
                             {resource.title}
+                            {!resource.available && <span className="text-xs ml-2 font-normal text-gray-400">(Coming Soon)</span>}
                           </CardTitle>
                         </CardHeader>
                         <CardContent>
-                          <p className="text-gray-600 text-sm mb-4">{resource.description}</p>
+                          <p className={`text-sm mb-4 ${resource.available ? 'text-gray-600' : 'text-gray-400'}`}>
+                            {resource.description}
+                          </p>
                           <div className="flex items-center justify-between">
                             <Button
                               variant="outline"
                               size="sm"
-                              className="hover:bg-teal-50 transition-colors duration-200"
-                              style={{ borderColor: '#214140', color: '#214140' }}
+                              disabled={!resource.available}
+                              className={resource.available ? 'hover:bg-teal-50 transition-colors duration-200' : 'cursor-not-allowed'}
+                              style={{
+                                borderColor: resource.available ? '#214140' : '#d1d5db',
+                                color: resource.available ? '#214140' : '#9ca3af'
+                              }}
                             >
-                              {resource.downloadable ? 'Download' : 
+                              {resource.downloadable ? 'Download' :
                                resource.interactive ? 'Launch Tool' :
                                resource.external ? 'Open Link' : 'Access'}
                             </Button>
-                            {resource.downloadable && (
+                            {resource.downloadable && resource.available && (
                               <span className="text-xs text-gray-500">Free Download</span>
+                            )}
+                            {!resource.available && (
+                              <span className="text-xs text-gray-400 italic">Not Available</span>
                             )}
                           </div>
                         </CardContent>
@@ -309,31 +437,35 @@ const ResourceLibraryPage = () => {
         <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
             <AnimatedSection animation="fade-up">
-              <div className="text-center max-w-3xl mx-auto">
-                <h2 className="text-3xl lg:text-4xl font-bold mb-6" style={{ color: '#214140' }}>
-                  Need Additional Support?
+              <div className="text-center max-w-4xl mx-auto mb-8">
+                <h2 className="text-3xl lg:text-4xl font-bold mb-4" style={{ color: '#214140' }}>
+                  Schedule a Consultation
                 </h2>
-                <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                  Our clinical team is available to provide personalized guidance and support throughout your implementation process.
+                <p className="text-lg text-gray-600 mb-8">
+                  Book a time to speak with our clinical team about implementing Cordflex in your facility
                 </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <Button
-                    className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200"
-                    style={{ backgroundColor: '#214140', color: 'white' }}
-                    onClick={() => window.open('https://calendly.com/davidusevitch/cordflex-consultation', '_blank')}
-                  >
-                    <Calendar className="h-5 w-5 mr-2" />
-                    Schedule a Consultation
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="px-8 py-4 text-lg font-semibold border-2 hover:bg-teal-50 transition-colors duration-200"
-                    style={{ borderColor: '#214140', color: '#214140' }}
-                    onClick={() => window.location.href = '/contact'}
-                  >
-                    Contact Support Team
-                  </Button>
-                </div>
+              </div>
+
+              {/* Calendly Embed */}
+              <div className="max-w-4xl mx-auto bg-gray-50 rounded-lg p-6 shadow-lg">
+                <div
+                  className="calendly-inline-widget"
+                  data-url="https://calendly.com/davidusevitch/meet-with-david-nursetech-medical?hide_gdpr_banner=1&primary_color=214140"
+                  style={{ minWidth: '320px', height: '700px' }}
+                ></div>
+              </div>
+
+              {/* Alternative Contact Option */}
+              <div className="text-center mt-8">
+                <p className="text-gray-600 mb-4">Prefer another way to reach us?</p>
+                <Button
+                  variant="outline"
+                  className="px-6 py-3 font-semibold border-2 hover:bg-teal-50 transition-colors duration-200"
+                  style={{ borderColor: '#214140', color: '#214140' }}
+                  onClick={() => window.location.href = '/contact'}
+                >
+                  Contact Support Team
+                </Button>
               </div>
             </AnimatedSection>
           </div>
@@ -354,23 +486,35 @@ const ResourceLibraryPage = () => {
             </AnimatedSection>
 
             <StaggeredList delay={200} className="grid md:grid-cols-4 gap-6">
-              <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
                 <CardContent className="p-6 text-center">
                   <FileText className="h-8 w-8 mx-auto mb-4" style={{ color: '#8BBAB8' }} />
                   <h3 className="font-semibold mb-2" style={{ color: '#214140' }}>Instructions for Use</h3>
-                  <Button variant="outline" size="sm">Download</Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => window.open('/resources/Instructions For Use.pdf', '_blank')}
+                  >
+                    Download
+                  </Button>
                 </CardContent>
               </Card>
 
-              <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
                 <CardContent className="p-6 text-center">
                   <Calculator className="h-8 w-8 mx-auto mb-4" style={{ color: '#8BBAB8' }} />
                   <h3 className="font-semibold mb-2" style={{ color: '#214140' }}>ROI Calculator</h3>
-                  <Button variant="outline" size="sm">Launch Tool</Button>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => window.open('/roi-calculator.html', '_blank')}
+                  >
+                    Launch Tool
+                  </Button>
                 </CardContent>
               </Card>
 
-              <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
                 <CardContent className="p-6 text-center">
                   <Video className="h-8 w-8 mx-auto mb-4" style={{ color: '#8BBAB8' }} />
                   <h3 className="font-semibold mb-2" style={{ color: '#214140' }}>Training Videos</h3>
@@ -380,14 +524,14 @@ const ResourceLibraryPage = () => {
                 </CardContent>
               </Card>
 
-              <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300">
+              <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer">
                 <CardContent className="p-6 text-center">
                   <Calendar className="h-8 w-8 mx-auto mb-4" style={{ color: '#8BBAB8' }} />
                   <h3 className="font-semibold mb-2" style={{ color: '#214140' }}>Schedule Call</h3>
-                  <Button 
-                    variant="outline" 
+                  <Button
+                    variant="outline"
                     size="sm"
-                    onClick={() => window.open('https://calendly.com/davidusevitch/cordflex-consultation', '_blank')}
+                    onClick={() => window.open('https://calendly.com/davidusevitch/meet-with-david-nursetech-medical', '_blank')}
                   >
                     Book Now
                   </Button>

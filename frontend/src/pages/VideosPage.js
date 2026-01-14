@@ -262,7 +262,7 @@ const VideosPage = () => {
                   <Button
                     className="px-8 py-4 text-lg font-semibold hover:opacity-90 transition-opacity duration-200"
                     style={{ backgroundColor: '#214140', color: 'white' }}
-                    onClick={() => window.open('https://calendly.com/davidusevitch/cordflex-consultation', '_blank')}
+                    onClick={() => window.open('https://calendly.com/davidusevitch/meet-with-david-nursetech-medical', '_blank')}
                   >
                     Schedule a Consultation
                   </Button>

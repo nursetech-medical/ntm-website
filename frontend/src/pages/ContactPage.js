@@ -68,7 +68,7 @@ const ContactPage = () => {
     {
       icon: <Phone className="h-6 w-6" />,
       title: "Phone",
-      details: ["1-800-CORDFLEX", "1-800-267-3353"]
+      details: ["(410) 835-4089"]
     },
     {
       icon: <Mail className="h-6 w-6" />,
@@ -78,7 +78,7 @@ const ContactPage = () => {
     {
       icon: <MapPin className="h-6 w-6" />,
       title: "Address",
-      details: ["123 Medical Drive", "Healthcare City, HC 12345"]
+      details: ["8 The Green, Ste A", "Dover, DE 19001"]
     },
     {
       icon: <Clock className="h-6 w-6" />,

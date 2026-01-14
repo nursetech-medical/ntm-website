@@ -23,12 +23,12 @@ const FAQSection = () => {
         {
           id: 1,
           question: "How long does it take to install the Cordflex Clip?",
-          answer: "Installation takes just 30 seconds. The intuitive design works like a hair clip, making it easy for staff to use immediately."
+          answer: "Installation takes less than 30 seconds. The intuitive design works like a hair clip, making it easy for staff to use immediately."
         },
         {
           id: 2,
           question: "Is training required for staff?",
-          answer: "Minimal training is required - just 15 minutes of staff training is sufficient for full implementation."
+          answer: "Minimal training is required - just 5 minutes of staff training is sufficient for full implementation."
         },
         {
           id: 3,

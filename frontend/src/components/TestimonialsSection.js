@@ -69,7 +69,7 @@ const TestimonialsSection = () => {
   };
 
   const handleReadCaseStudies = () => {
-    window.open('/resources', '_blank');
+    window.location.href = '/case-studies';
   };
 
   const renderStars = (rating) => {
@@ -113,23 +113,33 @@ const TestimonialsSection = () => {
           <AnimatedSection animation="scale-up" delay={200}>
             <div className="relative mb-12">
               <Card className="bg-white shadow-xl">
-                <CardContent className="p-8">
-                  <div className="flex items-center justify-between mb-6">
+                <CardContent className="p-12">
+                  <div className="relative">
+                    {/* Navigation Buttons */}
                     <button
                       onClick={prevTestimonial}
-                      className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
+                      className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-16 p-3 rounded-full hover:bg-gray-100 transition-colors duration-200 z-10"
                     >
-                      <ChevronLeft className="h-6 w-6 text-gray-600" />
+                      <ChevronLeft className="h-8 w-8 text-gray-600" />
                     </button>
-                    
-                    <div className="flex-1 text-center">
-                      <div className="mb-4">
+
+                    <button
+                      onClick={nextTestimonial}
+                      className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-16 p-3 rounded-full hover:bg-gray-100 transition-colors duration-200 z-10"
+                    >
+                      <ChevronRight className="h-8 w-8 text-gray-600" />
+                    </button>
+
+                    {/* Content */}
+                    <div className="text-center px-8">
+                      <div className="flex justify-center mb-6">
                         {renderStars(testimonials[currentTestimonial]?.rating || 5)}
                       </div>
-                      <blockquote className="text-lg lg:text-xl text-gray-700 italic mb-6 leading-relaxed">
+
+                      <blockquote className="text-xl lg:text-2xl text-gray-700 italic mb-8 leading-relaxed">
                         "{testimonials[currentTestimonial]?.content}"
                       </blockquote>
-                      
+
                       <div className="flex items-center justify-center space-x-4">
                         <div className="w-16 h-16 rounded-full bg-gradient-to-br from-teal-400 to-teal-600 flex items-center justify-center">
                           <span className="text-white font-bold text-lg">
@@ -137,7 +147,7 @@ const TestimonialsSection = () => {
                           </span>
                         </div>
                         <div className="text-left">
-                          <div className="font-semibold text-gray-800">
+                          <div className="font-semibold text-gray-800 text-lg">
                             {testimonials[currentTestimonial]?.name}
                           </div>
                           <div className="text-gray-600">
@@ -148,22 +158,8 @@ const TestimonialsSection = () => {
                           </div>
                         </div>
                       </div>
-                    </div>
-                    
-                    <button
-                      onClick={nextTestimonial}
-                      className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-200"
-                    >
-                      <ChevronRight className="h-6 w-6 text-gray-600" />
-                    </button>
-                  </div>
 
-                  {/* Video Testimonial Option */}
-                  <div className="text-center">
-                    <button className="inline-flex items-center space-x-2 text-gray-600 hover:text-teal-600 transition-colors duration-200">
-                      <Play className="h-4 w-4" />
-                      <span className="text-sm">Watch Video Testimonial</span>
-                    </button>
+                    </div>
                   </div>
                 </CardContent>
               </Card>

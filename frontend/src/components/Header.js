@@ -84,7 +84,7 @@ const Header = () => {
   };
 
   const handleCallNow = () => {
-    window.location.href = 'tel:+18002673539';
+    window.location.href = 'tel:+14108354089';
   };
 
   return (
@@ -95,12 +95,11 @@ const Header = () => {
         <div className="flex items-center justify-between">
           {/* Logo */}
           <Link to="/" className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-lg flex items-center justify-center" style={{ backgroundColor: '#214140' }}>
-              <span className="text-white font-bold text-xl">N</span>
-            </div>
-            <div className="text-2xl font-bold" style={{ color: '#214140' }}>
-              Nursetech Medical
-            </div>
+            <img
+              src="/images/logos/ntlogo.png"
+              alt="Nursetech Medical Logo"
+              className="h-16 w-auto"
+            />
           </Link>
 
           {/* Call Now Button */}
@@ -224,7 +223,7 @@ const Header = () => {
                 style={{ borderColor: '#1F8051', color: '#1F8051' }}
               >
                 <Phone className="h-4 w-4 mr-2" />
-                Call Now: 1-800-CORDFLEX
+                Call Now: (410) 835-4089
               </Button>
 
               {navigationItems.map((item, index) => (

@@ -8,6 +8,7 @@ import SampleRequestPage from "./pages/SampleRequestPage";
 import TrialRequestPage from "./pages/TrialRequestPage";
 import OrderNowPage from "./pages/OrderNowPage";
 import BlogPage from "./pages/BlogPage";
+import BlogArticlePage from "./pages/BlogArticlePage";
 import NewsPage from "./pages/NewsPage";
 import FAQPage from "./pages/FAQPage";
 import ProductOverviewPage from "./pages/ProductOverviewPage";
@@ -42,6 +43,7 @@ function App() {
             <Route path="/trial-request" element={<TrialRequestPage />} />
             <Route path="/order-now" element={<OrderNowPage />} />
             <Route path="/blog" element={<BlogPage />} />
+            <Route path="/blog/:id" element={<BlogArticlePage />} />
             <Route path="/news" element={<NewsPage />} />
             <Route path="/faq" element={<FAQPage />} />
             <Route path="/product-overview" element={<ProductOverviewPage />} />

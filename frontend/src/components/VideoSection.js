@@ -57,7 +57,7 @@ const VideoSection = () => {
 
   const quickLinks = [
     { time: '0:00', title: 'Product Overview', description: 'Introduction to Cordflex' },
-    { time: '1:30', title: 'Installation Demo', description: '30-second setup process' },
+    { time: '1:30', title: 'Installation Demo', description: '<30-second setup process' },
     { time: '2:45', title: 'Clinical Results', description: 'Real-world outcomes' }
   ];
 
@@ -81,23 +81,13 @@ const VideoSection = () => {
             <div className="relative aspect-video bg-gray-100 rounded-2xl overflow-hidden shadow-2xl mb-8">
               {!isPlaying ? (
                 <>
-                  {/* Video Thumbnail */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-20 h-20 bg-white rounded-full flex items-center justify-center shadow-lg mb-4 mx-auto">
-                        <div className="w-16 h-16 rounded-full flex items-center justify-center" style={{ backgroundColor: '#214140' }}>
-                          <Play className="h-8 w-8 text-white ml-1" />
-                        </div>
-                      </div>
-                      <h3 className="text-xl font-semibold text-gray-800 mb-2">
-                        Cordflex Demo Video
-                      </h3>
-                      <p className="text-gray-600">
-                        See how easy it is to implement Cordflex in your ICU
-                      </p>
-                    </div>
-                  </div>
-                  
+                  {/* YouTube Thumbnail */}
+                  <img
+                    src="https://img.youtube.com/vi/uxTUu8HbrEg/maxresdefault.jpg"
+                    alt="Cordflex Demo Video"
+                    className="absolute inset-0 w-full h-full object-cover"
+                  />
+
                   {/* Play Button Overlay */}
                   <button
                     onClick={handlePlayVideo}
@@ -123,31 +113,6 @@ const VideoSection = () => {
             </div>
           </AnimatedSection>
 
-          {/* Video Stats */}
-          <AnimatedSection animation="fade-up" delay={300}>
-            <div className="flex justify-center items-center space-x-8 mb-8">
-              <div className="flex items-center space-x-2 text-gray-600">
-                <Users className="h-5 w-5" />
-                <span className="text-sm">12,000+ views</span>
-              </div>
-              <div className="flex items-center space-x-2 text-gray-600">
-                <Calendar className="h-5 w-5" />
-                <span className="text-sm">Updated monthly</span>
-              </div>
-            </div>
-          </AnimatedSection>
-
-          {/* Quick Links */}
-          <AnimatedSection animation="fade-up" delay={400}>
-            <StaggeredList delay={100} className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
-              {quickLinks.map((link, index) => (
-                <button key={index} className="p-4 bg-gray-50 rounded-lg hover:bg-gray-100 transition-colors duration-200 text-left">
-                  <div className="font-semibold text-gray-800 mb-1">{link.time} - {link.title}</div>
-                  <div className="text-sm text-gray-600">{link.description}</div>
-                </button>
-              ))}
-            </StaggeredList>
-          </AnimatedSection>
 
           {/* CTA Buttons */}
           <AnimatedSection animation="fade-up" delay={500}>
